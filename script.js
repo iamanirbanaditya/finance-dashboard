@@ -7,6 +7,24 @@ let groupChart;
 
 
 
+// FORMAT MONEY
+
+function formatIndianCurrency(num) {
+
+  if (num >= 10000000) {
+    return (num / 10000000).toFixed(3) + " Cr";
+  }
+
+  if (num >= 100000) {
+    return (num / 100000).toFixed(2) + " L";
+  }
+
+  return num.toLocaleString("en-IN");
+
+}
+
+
+
 // LOAD DASHBOARD
 
 async function loadDashboard() {
@@ -47,10 +65,7 @@ function populateMonthFilter() {
 
 
   monthFilter.innerHTML =
-    `<option value="All">
-      All Months
-    </option>`;
-
+    `<option value="All">All Months</option>`;
 
 
   months.forEach(month => {
@@ -66,7 +81,7 @@ function populateMonthFilter() {
 
 
 
-// FINANCIAL GROUP FILTER
+// GROUP FILTER
 
 function populateGroupFilter() {
 
@@ -86,7 +101,6 @@ function populateGroupFilter() {
     </option>`;
 
 
-
   groups.forEach(group => {
 
     groupFilter.innerHTML +=
@@ -102,15 +116,32 @@ function populateGroupFilter() {
 
 // CATEGORY FILTER
 
-function populateCategoryFilter() {
+function populateCategoryFilter(selectedGroup = "All") {
 
   const categoryFilter =
     document.getElementById("categoryFilter");
 
 
 
+  let filteredCategories = allData;
+
+
+
+  if (selectedGroup !== "All") {
+
+    filteredCategories =
+      allData.filter(
+        item => item.group === selectedGroup
+      );
+
+  }
+
+
+
   const categories =
-    [...new Set(allData.map(item => item.category))];
+    [...new Set(
+      filteredCategories.map(item => item.category)
+    )];
 
 
 
@@ -118,7 +149,6 @@ function populateCategoryFilter() {
     `<option value="All">
       All Categories
     </option>`;
-
 
 
   categories.forEach(category => {
@@ -162,33 +192,53 @@ function updateDashboard(filteredData) {
 
 
 
+  const outflowPercent =
+    totalInflow > 0
+      ? ((totalOutflow / totalInflow) * 100)
+          .toFixed(1)
+      : 0;
+
+
+
   // KPI CARDS
 
   document.getElementById("totalInflow")
     .innerText =
-    "₹" + totalInflow.toLocaleString("en-IN");
+    "₹" + formatIndianCurrency(totalInflow);
 
 
 
   document.getElementById("totalOutflow")
     .innerText =
-    "₹" + totalOutflow.toLocaleString("en-IN");
+    "₹" + formatIndianCurrency(totalOutflow);
 
 
 
   document.getElementById("netCashFlow")
     .innerText =
-    "₹" + netCashFlow.toLocaleString("en-IN");
+    "₹" + formatIndianCurrency(netCashFlow);
 
 
 
   document.getElementById("endingBalance")
     .innerText =
-    "₹" + endingBalance.toLocaleString("en-IN");
+    "₹" + formatIndianCurrency(endingBalance);
 
 
 
-  // DESTROY OLD CHARTS
+  // OPTIONAL KPI
+
+  const outflowCard =
+    document.getElementById("outflowPercent");
+
+  if (outflowCard) {
+    outflowCard.innerText =
+      outflowPercent + "%";
+  }
+
+
+
+  // DESTROY CHARTS
 
   if (cashFlowChart) cashFlowChart.destroy();
 
@@ -227,9 +277,7 @@ function updateDashboard(filteredData) {
             "#ef4444"
           ],
 
-          borderRadius: 12,
-
-          borderSkipped: false
+          borderRadius: 12
 
         }]
       },
@@ -244,32 +292,21 @@ function updateDashboard(filteredData) {
             labels: {
               color: "white"
             }
-          }
-
-        },
-
-        scales: {
-
-          x: {
-
-            ticks: {
-              color: "white"
-            },
-
-            grid: {
-              color: "#334155"
-            }
-
           },
 
-          y: {
+          tooltip: {
 
-            ticks: {
-              color: "white"
-            },
+            callbacks: {
 
-            grid: {
-              color: "#334155"
+              label: function(context) {
+
+                return (
+                  "₹" +
+                  formatIndianCurrency(context.raw)
+                );
+
+              }
+
             }
 
           }
@@ -321,8 +358,7 @@ function updateDashboard(filteredData) {
             "#f97316",
             "#06b6d4",
             "#84cc16",
-            "#6366f1",
-            "#e11d48"
+            "#6366f1"
 
           ],
 
@@ -334,6 +370,24 @@ function updateDashboard(filteredData) {
       options: {
 
         plugins: {
+
+          tooltip: {
+
+            callbacks: {
+
+              label: function(context) {
+
+                return (
+                  context.label +
+                  ": ₹" +
+                  formatIndianCurrency(context.raw)
+                );
+
+              }
+
+            }
+
+          },
 
           legend: {
 
@@ -355,7 +409,7 @@ function updateDashboard(filteredData) {
 
 
   // CHART 3
-  // NET CASH FLOW TREND
+  // MONTH TREND
 
   const monthTotals = {};
 
@@ -427,32 +481,21 @@ function updateDashboard(filteredData) {
             labels: {
               color: "white"
             }
-          }
-
-        },
-
-        scales: {
-
-          x: {
-
-            ticks: {
-              color: "white"
-            },
-
-            grid: {
-              color: "#334155"
-            }
-
           },
 
-          y: {
+          tooltip: {
 
-            ticks: {
-              color: "white"
-            },
+            callbacks: {
 
-            grid: {
-              color: "#334155"
+              label: function(context) {
+
+                return (
+                  "₹" +
+                  formatIndianCurrency(context.raw)
+                );
+
+              }
+
             }
 
           }
@@ -467,7 +510,7 @@ function updateDashboard(filteredData) {
 
 
   // CHART 4
-  // FINANCIAL GROUP ANALYSIS
+  // GROUP ANALYSIS
 
   const groupTotals = {};
 
@@ -511,16 +554,14 @@ function updateDashboard(filteredData) {
             "#eab308"
           ],
 
-          borderRadius: 10,
-
-          borderSkipped: false
+          borderRadius: 10
 
         }]
       },
 
       options: {
 
-        responsive: true,
+        indexAxis: "y",
 
         plugins: {
 
@@ -528,32 +569,21 @@ function updateDashboard(filteredData) {
             labels: {
               color: "white"
             }
-          }
-
-        },
-
-        scales: {
-
-          x: {
-
-            ticks: {
-              color: "white"
-            },
-
-            grid: {
-              color: "#334155"
-            }
-
           },
 
-          y: {
+          tooltip: {
 
-            ticks: {
-              color: "white"
-            },
+            callbacks: {
 
-            grid: {
-              color: "#334155"
+              label: function(context) {
+
+                return (
+                  "₹" +
+                  formatIndianCurrency(context.raw)
+                );
+
+              }
+
             }
 
           }
@@ -587,11 +617,15 @@ function applyFilters() {
 
 
 
+  populateCategoryFilter(selectedGroup);
+
+
+
   let filteredData = allData;
 
 
 
-  // MONTH FILTER
+  // MONTH
 
   if (selectedMonth !== "All") {
 
@@ -604,7 +638,7 @@ function applyFilters() {
 
 
 
-  // FLOW FILTER
+  // FLOW
 
   if (selectedFlow !== "All") {
 
@@ -617,7 +651,7 @@ function applyFilters() {
 
 
 
-  // GROUP FILTER
+  // GROUP
 
   if (selectedGroup !== "All") {
 
@@ -630,7 +664,7 @@ function applyFilters() {
 
 
 
-  // CATEGORY FILTER
+  // CATEGORY
 
   if (selectedCategory !== "All") {
 
