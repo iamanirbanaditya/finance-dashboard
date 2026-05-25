@@ -1,6 +1,13 @@
 let allData = [];
 
+let cashFlowChart;
+let categoryChart;
+let monthChart;
+let departmentChart;
 
+
+
+// LOAD DASHBOARD
 
 async function loadDashboard() {
 
@@ -19,6 +26,8 @@ async function loadDashboard() {
 
 
 
+// POPULATE MONTH FILTER
+
 function populateMonthFilter() {
 
   const monthFilter =
@@ -32,7 +41,10 @@ function populateMonthFilter() {
 
 
   monthFilter.innerHTML =
-    `<option value="All">All Months</option>`;
+    `<option value="All">
+      All Months
+    </option>`;
+
 
 
   months.forEach(month => {
@@ -47,6 +59,8 @@ function populateMonthFilter() {
 }
 
 
+
+// MAIN DASHBOARD UPDATE
 
 function updateDashboard(filteredData) {
 
@@ -108,15 +122,28 @@ function updateDashboard(filteredData) {
 
   // DESTROY OLD CHARTS
 
-  Chart.helpers.each(Chart.instances, function(instance){
-    instance.destroy();
-  });
+  if (cashFlowChart) {
+    cashFlowChart.destroy();
+  }
+
+  if (categoryChart) {
+    categoryChart.destroy();
+  }
+
+  if (monthChart) {
+    monthChart.destroy();
+  }
+
+  if (departmentChart) {
+    departmentChart.destroy();
+  }
 
 
 
   // CHART 1
+  // INFLOW VS OUTFLOW
 
-  new Chart(
+  cashFlowChart = new Chart(
     document.getElementById("cashFlowTypeChart"),
     {
 
@@ -142,6 +169,7 @@ function updateDashboard(filteredData) {
 
 
   // CHART 2
+  // OUTFLOW BY CATEGORY
 
   const outflowData =
     filteredData.filter(
@@ -150,7 +178,7 @@ function updateDashboard(filteredData) {
 
 
 
-  new Chart(
+  categoryChart = new Chart(
     document.getElementById("categoryChart"),
     {
 
@@ -173,6 +201,7 @@ function updateDashboard(filteredData) {
 
 
   // CHART 3
+  // NET CASH FLOW BY MONTH
 
   const monthTotals = {};
 
@@ -198,7 +227,7 @@ function updateDashboard(filteredData) {
 
 
 
-  new Chart(
+  monthChart = new Chart(
     document.getElementById("monthChart"),
     {
 
@@ -221,6 +250,7 @@ function updateDashboard(filteredData) {
 
 
   // CHART 4
+  // CATEGORY TOTALS
 
   const categoryTotals = {};
 
@@ -238,7 +268,7 @@ function updateDashboard(filteredData) {
 
 
 
-  new Chart(
+  departmentChart = new Chart(
     document.getElementById("departmentChart"),
     {
 
@@ -266,33 +296,66 @@ function updateDashboard(filteredData) {
 
 
 
+// APPLY FILTERS
+
+function applyFilters() {
+
+  const selectedMonth =
+    document.getElementById("monthFilter").value;
+
+  const selectedFlow =
+    document.getElementById("cashFlowFilter").value;
+
+
+
+  let filteredData = allData;
+
+
+
+  // MONTH FILTER
+
+  if (selectedMonth !== "All") {
+
+    filteredData =
+      filteredData.filter(
+        item => item.month === selectedMonth
+      );
+
+  }
+
+
+
+  // CASH FLOW FILTER
+
+  if (selectedFlow !== "All") {
+
+    filteredData =
+      filteredData.filter(
+        item => item.flowType === selectedFlow
+      );
+
+  }
+
+
+
+  updateDashboard(filteredData);
+
+}
+
+
+
+// EVENT LISTENERS
+
 document.getElementById("monthFilter")
-  .addEventListener("change", function() {
-
-    const selectedMonth =
-      this.value;
+  .addEventListener("change", applyFilters);
 
 
 
-    if (selectedMonth === "All") {
-
-      updateDashboard(allData);
-
-    }
-
-    else {
-
-      const filteredData =
-        allData.filter(
-          item => item.month === selectedMonth
-        );
-
-      updateDashboard(filteredData);
-
-    }
-
-});
+document.getElementById("cashFlowFilter")
+  .addEventListener("change", applyFilters);
 
 
+
+// INITIAL LOAD
 
 loadDashboard();
