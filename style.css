@@ -534,4 +534,31 @@ body {
 
   }
 
+
+
+
+  
+}
+
+
+/* DROPDOWN OPTIONS */
+
+select option {
+
+  background: #1e293b;
+
+  color: white;
+
+}
+
+
+
+/* FOR BETTER VISIBILITY */
+
+select:focus {
+
+  outline: none;
+
+  border: 1px solid #C8102E;
+
 }
