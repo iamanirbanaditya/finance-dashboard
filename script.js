@@ -20,13 +20,19 @@ async function loadDashboard() {
 
   populateMonthFilter();
 
+  populateDepartmentFilter();
+
+  populateCategoryFilter();
+
+
+
   updateDashboard(allData);
 
 }
 
 
 
-// POPULATE MONTH FILTER
+// MONTH FILTER
 
 function populateMonthFilter() {
 
@@ -58,6 +64,10 @@ function populateMonthFilter() {
 
 }
 
+
+
+// DEPARTMENT FILTER
+
 function populateDepartmentFilter() {
 
   const departmentFilter =
@@ -66,7 +76,7 @@ function populateDepartmentFilter() {
 
 
   const departments =
-    [...new Set(allData.map(item => item.category))];
+    [...new Set(allData.map(item => item.flowType))];
 
 
 
@@ -90,11 +100,45 @@ function populateDepartmentFilter() {
 
 
 
-// MAIN DASHBOARD UPDATE
+// CATEGORY FILTER
+
+function populateCategoryFilter() {
+
+  const categoryFilter =
+    document.getElementById("categoryFilter");
+
+
+
+  const categories =
+    [...new Set(allData.map(item => item.category))];
+
+
+
+  categoryFilter.innerHTML =
+    `<option value="All">
+      All Categories
+    </option>`;
+
+
+
+  categories.forEach(category => {
+
+    categoryFilter.innerHTML +=
+      `<option value="${category}">
+        ${category}
+      </option>`;
+
+  });
+
+}
+
+
+
+// UPDATE DASHBOARD
 
 function updateDashboard(filteredData) {
 
-  // TOTAL INFLOW
+  // TOTALS
 
   const totalInflow = filteredData
     .filter(item => item.flowType === "Inflow")
@@ -102,29 +146,23 @@ function updateDashboard(filteredData) {
 
 
 
-  // TOTAL OUTFLOW
-
   const totalOutflow = filteredData
     .filter(item => item.flowType === "Outflow")
     .reduce((sum, item) => sum + item.amount, 0);
 
 
 
-  // NET CASH FLOW
-
   const netCashFlow =
     totalInflow - totalOutflow;
 
 
-
-  // ENDING BALANCE
 
   const endingBalance =
     netCashFlow;
 
 
 
-  // UPDATE KPI CARDS
+  // KPI CARDS
 
   document.getElementById("totalInflow")
     .innerText =
@@ -152,21 +190,13 @@ function updateDashboard(filteredData) {
 
   // DESTROY OLD CHARTS
 
-  if (cashFlowChart) {
-    cashFlowChart.destroy();
-  }
+  if (cashFlowChart) cashFlowChart.destroy();
 
-  if (categoryChart) {
-    categoryChart.destroy();
-  }
+  if (categoryChart) categoryChart.destroy();
 
-  if (monthChart) {
-    monthChart.destroy();
-  }
+  if (monthChart) monthChart.destroy();
 
-  if (departmentChart) {
-    departmentChart.destroy();
-  }
+  if (departmentChart) departmentChart.destroy();
 
 
 
@@ -184,13 +214,62 @@ function updateDashboard(filteredData) {
         labels: ["Inflow", "Outflow"],
 
         datasets: [{
+
           label: "Amount",
 
           data: [
             totalInflow,
             totalOutflow
-          ]
+          ],
+
+          backgroundColor: [
+            "#22c55e",
+            "#ef4444"
+          ],
+
+          borderRadius: 12,
+
+          borderSkipped: false
+
         }]
+      },
+
+      options: {
+
+        responsive: true,
+
+        plugins: {
+          legend: {
+            labels: {
+              color: "white"
+            }
+          }
+        },
+
+        scales: {
+
+          x: {
+            ticks: {
+              color: "white"
+            },
+
+            grid: {
+              color: "#334155"
+            }
+          },
+
+          y: {
+            ticks: {
+              color: "white"
+            },
+
+            grid: {
+              color: "#334155"
+            }
+          }
+
+        }
+
       }
 
     }
@@ -199,7 +278,7 @@ function updateDashboard(filteredData) {
 
 
   // CHART 2
-  // OUTFLOW BY CATEGORY
+  // CATEGORY PIE
 
   const outflowData =
     filteredData.filter(
@@ -220,9 +299,38 @@ function updateDashboard(filteredData) {
           outflowData.map(item => item.category),
 
         datasets: [{
+
           data:
-            outflowData.map(item => item.amount)
+            outflowData.map(item => item.amount),
+
+          backgroundColor: [
+            "#3b82f6",
+            "#8b5cf6",
+            "#f59e0b",
+            "#ef4444",
+            "#14b8a6",
+            "#ec4899",
+            "#22c55e",
+            "#f97316",
+            "#06b6d4",
+            "#84cc16"
+          ],
+
+          borderWidth: 0
+
         }]
+      },
+
+      options: {
+
+        plugins: {
+          legend: {
+            labels: {
+              color: "white"
+            }
+          }
+        }
+
       }
 
     }
@@ -231,7 +339,7 @@ function updateDashboard(filteredData) {
 
 
   // CHART 3
-  // NET CASH FLOW BY MONTH
+  // MONTH TREND
 
   const monthTotals = {};
 
@@ -268,10 +376,61 @@ function updateDashboard(filteredData) {
         labels: Object.keys(monthTotals),
 
         datasets: [{
+
           label: "Net Cash Flow",
 
-          data: Object.values(monthTotals)
+          data: Object.values(monthTotals),
+
+          borderColor: "#C8102E",
+
+          backgroundColor:
+            "rgba(200,16,46,0.2)",
+
+          fill: true,
+
+          tension: 0.4,
+
+          pointBackgroundColor: "#ffffff",
+
+          pointRadius: 5
+
         }]
+      },
+
+      options: {
+
+        plugins: {
+          legend: {
+            labels: {
+              color: "white"
+            }
+          }
+        },
+
+        scales: {
+
+          x: {
+            ticks: {
+              color: "white"
+            },
+
+            grid: {
+              color: "#334155"
+            }
+          },
+
+          y: {
+            ticks: {
+              color: "white"
+            },
+
+            grid: {
+              color: "#334155"
+            }
+          }
+
+        }
+
       }
 
     }
@@ -309,14 +468,54 @@ function updateDashboard(filteredData) {
         labels: Object.keys(categoryTotals),
 
         datasets: [{
+
           label: "Amount",
 
-          data: Object.values(categoryTotals)
+          data: Object.values(categoryTotals),
+
+          backgroundColor: "#3b82f6",
+
+          borderRadius: 10
+
         }]
       },
 
       options: {
-        indexAxis: "y"
+
+        indexAxis: "y",
+
+        plugins: {
+          legend: {
+            labels: {
+              color: "white"
+            }
+          }
+        },
+
+        scales: {
+
+          x: {
+            ticks: {
+              color: "white"
+            },
+
+            grid: {
+              color: "#334155"
+            }
+          },
+
+          y: {
+            ticks: {
+              color: "white"
+            },
+
+            grid: {
+              color: "#334155"
+            }
+          }
+
+        }
+
       }
 
     }
@@ -339,6 +538,9 @@ function applyFilters() {
   const selectedDepartment =
     document.getElementById("departmentFilter").value;
 
+  const selectedCategory =
+    document.getElementById("categoryFilter").value;
+
 
 
   let filteredData = allData;
@@ -358,7 +560,7 @@ function applyFilters() {
 
 
 
-  // CASH FLOW FILTER
+  // FLOW FILTER
 
   if (selectedFlow !== "All") {
 
@@ -370,14 +572,31 @@ function applyFilters() {
   }
 
 
+
+  // DEPARTMENT FILTER
+
   if (selectedDepartment !== "All") {
 
     filteredData =
       filteredData.filter(
-        item => item.category === selectedDepartment
+        item => item.flowType === selectedDepartment
       );
 
   }
+
+
+
+  // CATEGORY FILTER
+
+  if (selectedCategory !== "All") {
+
+    filteredData =
+      filteredData.filter(
+        item => item.category === selectedCategory
+      );
+
+  }
+
 
 
   updateDashboard(filteredData);
@@ -391,13 +610,13 @@ function applyFilters() {
 document.getElementById("monthFilter")
   .addEventListener("change", applyFilters);
 
-
-
 document.getElementById("cashFlowFilter")
   .addEventListener("change", applyFilters);
 
+document.getElementById("departmentFilter")
+  .addEventListener("change", applyFilters);
 
-  document.getElementById("departmentFilter")
+document.getElementById("categoryFilter")
   .addEventListener("change", applyFilters);
 
 

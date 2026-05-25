@@ -3,7 +3,9 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0"/>
 
   <title>Cash Flow Dashboard</title>
 
@@ -16,16 +18,27 @@
 
   <div class="dashboard">
 
+
     <!-- HEADER -->
 
     <div class="header">
-      <h1>Cash Flow Dashboard</h1>
+
+      <div>
+        <h1>Cash Flow Dashboard</h1>
+
+        <p>
+          Financial Overview & Cash Flow Analytics
+        </p>
+      </div>
+
     </div>
+
 
 
     <!-- FILTERS -->
 
     <div class="filters">
+
 
       <!-- DEPARTMENT FILTER -->
 
@@ -33,6 +46,18 @@
 
         <option value="All">
           All Departments
+        </option>
+
+      </select>
+
+
+
+      <!-- CATEGORY FILTER -->
+
+      <select id="categoryFilter">
+
+        <option value="All">
+          All Categories
         </option>
 
       </select>
@@ -92,60 +117,142 @@
     </div>
 
 
+
     <!-- KPI CARDS -->
 
     <div class="cards">
 
+
+      <!-- CARD 1 -->
+
       <div class="card">
-        <h3>Total Outflow</h3>
+
+        <div class="cardTop">
+          <h3>Total Outflow</h3>
+        </div>
+
         <p id="totalOutflow">₹0</p>
+
       </div>
 
+
+
+      <!-- CARD 2 -->
+
       <div class="card">
-        <h3>Total Inflow</h3>
+
+        <div class="cardTop">
+          <h3>Total Inflow</h3>
+        </div>
+
         <p id="totalInflow">₹0</p>
+
       </div>
 
+
+
+      <!-- CARD 3 -->
+
       <div class="card">
-        <h3>Net Cash Flow</h3>
+
+        <div class="cardTop">
+          <h3>Net Cash Flow</h3>
+        </div>
+
         <p id="netCashFlow">₹0</p>
+
       </div>
 
+
+
+      <!-- CARD 4 -->
+
       <div class="card">
-        <h3>Ending Balance</h3>
+
+        <div class="cardTop">
+          <h3>Ending Balance</h3>
+        </div>
+
         <p id="endingBalance">₹0</p>
+
       </div>
 
     </div>
+
 
 
     <!-- CHARTS -->
 
     <div class="charts">
 
+
+      <!-- CHART 1 -->
+
       <div class="chartCard">
-        <h2>Outflow & Inflow by Cash Flow Type</h2>
+
+        <div class="chartHeader">
+          <h2>
+            Outflow & Inflow by Cash Flow Type
+          </h2>
+        </div>
+
         <canvas id="cashFlowTypeChart"></canvas>
+
       </div>
 
+
+
+      <!-- CHART 2 -->
+
       <div class="chartCard">
-        <h2>Total Outflow by Category</h2>
+
+        <div class="chartHeader">
+          <h2>
+            Total Outflow by Category
+          </h2>
+        </div>
+
         <canvas id="categoryChart"></canvas>
+
       </div>
 
+
+
+      <!-- CHART 3 -->
+
       <div class="chartCard">
-        <h2>Net Cash Flow by Month</h2>
+
+        <div class="chartHeader">
+          <h2>
+            Net Cash Flow by Month
+          </h2>
+        </div>
+
         <canvas id="monthChart"></canvas>
+
       </div>
 
+
+
+      <!-- CHART 4 -->
+
       <div class="chartCard">
-        <h2>Ending Balance by Department</h2>
+
+        <div class="chartHeader">
+          <h2>
+            Ending Balance by Department
+          </h2>
+        </div>
+
         <canvas id="departmentChart"></canvas>
+
       </div>
 
     </div>
 
   </div>
+
+
 
   <script src="script.js"></script>
 
