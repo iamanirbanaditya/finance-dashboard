@@ -1,98 +1,127 @@
 const XLSX = require("xlsx");
+
 const fs = require("fs");
 
-
-
-// READ EXCEL FILE
-
-const workbook = XLSX.readFile("January'26(1).xls");
+const path = require("path");
 
 
 
-// GET FIRST SHEET
-
-const sheetName = workbook.SheetNames[0];
-
-const sheet = workbook.Sheets[sheetName];
+const excelFolder = "./excel-data";
 
 
 
-// CONVERT TO JSON
-
-const rawData = XLSX.utils.sheet_to_json(sheet, {
-  header: 1
-});
+const files =
+  fs.readdirSync(excelFolder);
 
 
 
-const finalData = [];
-
-let currentFlow = "";
+let finalData = [];
 
 
 
-rawData.forEach((row) => {
+files.forEach(file => {
 
-  const col1 = row[0];
-  const col2 = row[1];
-  const col3 = row[2];
-
-
-
-  // DETECT INFLOW
-
-  if (
-    typeof col1 === "string" &&
-    col1.includes("Inflow")
-  ) {
-    currentFlow = "Inflow";
-  }
+  const workbook =
+    XLSX.readFile(
+      path.join(excelFolder, file)
+    );
 
 
 
-  // DETECT OUTFLOW
-
-  if (
-    typeof col1 === "string" &&
-    col1.includes("Outflow")
-  ) {
-    currentFlow = "Outflow";
-  }
+  const sheetName =
+    workbook.SheetNames[0];
 
 
 
-  // EXTRACT CATEGORY + AMOUNT
+  const sheet =
+    workbook.Sheets[sheetName];
 
-  if (
-    typeof col1 === "string" &&
-    typeof col2 === "number"
-  ) {
 
-    finalData.push({
 
-      month: "January",
-
-      flowType: currentFlow,
-
-      category: col1,
-
-      amount: col2
-
+  const rawData =
+    XLSX.utils.sheet_to_json(sheet, {
+      header: 1
     });
 
-  }
+
+
+  let currentFlow = "";
+
+
+
+  // MONTH NAME
+
+  const month =
+    file.split("'")[0];
+
+
+
+  rawData.forEach(row => {
+
+    const col1 = row[0];
+
+    const col2 = row[1];
+
+
+
+    // INFLOW
+
+    if (
+      typeof col1 === "string" &&
+      col1.includes("Inflow")
+    ) {
+      currentFlow = "Inflow";
+    }
+
+
+
+    // OUTFLOW
+
+    if (
+      typeof col1 === "string" &&
+      col1.includes("Outflow")
+    ) {
+      currentFlow = "Outflow";
+    }
+
+
+
+    // CATEGORY + AMOUNT
+
+    if (
+      typeof col1 === "string" &&
+      typeof col2 === "number"
+    ) {
+
+      finalData.push({
+
+        month: month,
+
+        flowType: currentFlow,
+
+        category: col1,
+
+        amount: col2
+
+      });
+
+    }
+
+  });
 
 });
 
 
 
-// SAVE JSON
+// SAVE FINAL JSON
 
 fs.writeFileSync(
-  "dashboard-data.json",
+  "./data/dashboard-data.json",
   JSON.stringify(finalData, null, 2)
 );
 
 
 
-console.log("dashboard-data.json created successfully!");
+console.log(
+  "Multi-month dashboard-data.json created!"
+);
