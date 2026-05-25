@@ -5,8 +5,10 @@
 
   <meta charset="UTF-8" />
 
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0"/>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
 
   <title>
     Cash Flow Dashboard
@@ -35,8 +37,26 @@
         </h1>
 
         <p>
-          Financial Overview & Cash Flow Analytics
+          Financial Overview & Executive Analytics
         </p>
+
+      </div>
+
+
+
+      <div class="headerRight">
+
+        <div class="lastUpdatedBox">
+
+          <span>
+            Last Updated
+          </span>
+
+          <h3 id="lastUpdated">
+            Loading...
+          </h3>
+
+        </div>
 
       </div>
 
@@ -50,7 +70,7 @@
 
 
 
-      <!-- FINANCIAL GROUP FILTER -->
+      <!-- GROUP FILTER -->
 
       <select id="groupFilter">
 
@@ -128,6 +148,60 @@
 
 
 
+    <!-- EXECUTIVE SUMMARY -->
+
+    <div class="summarySection">
+
+      <div class="summaryCard">
+
+        <h3>
+          Executive Summary
+        </h3>
+
+        <p id="executiveSummary">
+
+          Financial performance is stable.
+
+        </p>
+
+      </div>
+
+
+
+      <div class="summaryCard">
+
+        <h3>
+          Highest Risk Area
+        </h3>
+
+        <p id="highestRiskArea">
+
+          -
+
+        </p>
+
+      </div>
+
+
+
+      <div class="summaryCard">
+
+        <h3>
+          Financial Status
+        </h3>
+
+        <p id="financialStatus">
+
+          Healthy
+
+        </p>
+
+      </div>
+
+    </div>
+
+
+
     <!-- KPI CARDS -->
 
     <div class="cards">
@@ -136,33 +210,17 @@
 
       <!-- CARD 1 -->
 
-      <div class="card">
-
-        <div class="cardTop">
-
-          <h3>
-            Total Outflow
-          </h3>
-
-        </div>
-
-        <p id="totalOutflow">
-          ₹0
-        </p>
-
-      </div>
-
-
-
-      <!-- CARD 2 -->
-
-      <div class="card">
+      <div class="card inflowCard">
 
         <div class="cardTop">
 
           <h3>
             Total Inflow
           </h3>
+
+          <span class="trend positive">
+            ▲ Positive
+          </span>
 
         </div>
 
@@ -174,15 +232,43 @@
 
 
 
+      <!-- CARD 2 -->
+
+      <div class="card outflowCard">
+
+        <div class="cardTop">
+
+          <h3>
+            Total Outflow
+          </h3>
+
+          <span class="trend negative">
+            ▼ Expense
+          </span>
+
+        </div>
+
+        <p id="totalOutflow">
+          ₹0
+        </p>
+
+      </div>
+
+
+
       <!-- CARD 3 -->
 
-      <div class="card">
+      <div class="card netCard">
 
         <div class="cardTop">
 
           <h3>
             Net Cash Flow
           </h3>
+
+          <span class="trend neutral">
+            ● Net
+          </span>
 
         </div>
 
@@ -262,8 +348,6 @@
 
 
 
-      <!-- INSIGHT 1 -->
-
       <div class="insightCard">
 
         <h3>
@@ -277,8 +361,6 @@
       </div>
 
 
-
-      <!-- INSIGHT 2 -->
 
       <div class="insightCard">
 
@@ -294,8 +376,6 @@
 
 
 
-      <!-- INSIGHT 3 -->
-
       <div class="insightCard">
 
         <h3>
@@ -309,8 +389,6 @@
       </div>
 
 
-
-      <!-- INSIGHT 4 -->
 
       <div class="insightCard">
 
@@ -336,17 +414,17 @@
 
       <!-- CHART 1 -->
 
-      <div class="chartCard">
+      <div class="chartCard largeChart">
 
         <div class="chartHeader">
 
           <h2>
-            Outflow & Inflow by Cash Flow Type
+            Monthly Financial Trend Analysis
           </h2>
 
         </div>
 
-        <canvas id="cashFlowTypeChart"></canvas>
+        <canvas id="monthChart"></canvas>
 
       </div>
 
@@ -359,12 +437,12 @@
         <div class="chartHeader">
 
           <h2>
-            Total Outflow by Category
+            Inflow vs Outflow Comparison
           </h2>
 
         </div>
 
-        <canvas id="categoryChart"></canvas>
+        <canvas id="cashFlowTypeChart"></canvas>
 
       </div>
 
@@ -377,12 +455,12 @@
         <div class="chartHeader">
 
           <h2>
-            Net Cash Flow by Month
+            Top 10 Expense Categories
           </h2>
 
         </div>
 
-        <canvas id="monthChart"></canvas>
+        <canvas id="categoryChart"></canvas>
 
       </div>
 
@@ -413,7 +491,7 @@
         <div class="chartHeader">
 
           <h2>
-            Monthly Inflow Contribution %
+            Inflow Contribution Analysis
           </h2>
 
         </div>
@@ -431,7 +509,7 @@
         <div class="chartHeader">
 
           <h2>
-            Monthly Outflow Contribution %
+            Outflow Contribution Analysis
           </h2>
 
         </div>
@@ -444,7 +522,7 @@
 
 
 
-    <!-- DATA TABLE -->
+    <!-- TABLE SECTION -->
 
     <div class="tableSection">
 
@@ -458,11 +536,23 @@
 
 
 
-        <input
-          type="text"
-          id="searchInput"
-          placeholder="Search category..."
-        >
+        <div class="tableActions">
+
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Search category..."
+          >
+
+
+
+          <button id="exportBtn">
+
+            Export Report
+
+          </button>
+
+        </div>
 
       </div>
 
