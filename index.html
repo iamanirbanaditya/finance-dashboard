@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Finance Dashboard</title>
+
+  <link rel="stylesheet" href="style.css" />
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="topbar">
+      <h1>Finance Dashboard</h1>
+
+      <select>
+        <option>January 2026</option>
+      </select>
+    </div>
+
+    <div class="cards">
+
+      <div class="card">
+        <h3>Total Inflow</h3>
+        <p id="inflow">₹0</p>
+      </div>
+
+      <div class="card">
+        <h3>Total Outflow</h3>
+        <p id="outflow">₹0</p>
+      </div>
+
+      <div class="card">
+        <h3>Net Cash Flow</h3>
+        <p id="netcash">₹0</p>
+      </div>
+
+    </div>
+
+    <div class="chartBox">
+      <canvas id="financeChart"></canvas>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+
+</body>
+
+</html>
