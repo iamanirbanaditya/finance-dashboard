@@ -1120,6 +1120,10 @@ function applyFilters() {
 
   populateCategoryFilter(selectedGroup);
 
+    document.getElementById(
+    "categoryFilter"
+    ).value = selectedCategory;
+
 
 
   let filteredData = allData;
