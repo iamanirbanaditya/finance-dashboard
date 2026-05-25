@@ -8,7 +8,9 @@
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0"/>
 
-  <title>Cash Flow Dashboard</title>
+  <title>
+    Cash Flow Dashboard
+  </title>
 
   <link rel="stylesheet" href="style.css">
 
@@ -21,13 +23,16 @@
   <div class="dashboard">
 
 
+
     <!-- HEADER -->
 
     <div class="header">
 
       <div>
 
-        <h1>Cash Flow Dashboard</h1>
+        <h1>
+          Cash Flow Dashboard
+        </h1>
 
         <p>
           Financial Overview & Cash Flow Analytics
@@ -42,6 +47,7 @@
     <!-- FILTERS -->
 
     <div class="filters">
+
 
 
       <!-- FINANCIAL GROUP FILTER -->
@@ -127,15 +133,22 @@
     <div class="cards">
 
 
+
       <!-- CARD 1 -->
 
       <div class="card">
 
         <div class="cardTop">
-          <h3>Total Outflow</h3>
+
+          <h3>
+            Total Outflow
+          </h3>
+
         </div>
 
-        <p id="totalOutflow">₹0</p>
+        <p id="totalOutflow">
+          ₹0
+        </p>
 
       </div>
 
@@ -146,10 +159,16 @@
       <div class="card">
 
         <div class="cardTop">
-          <h3>Total Inflow</h3>
+
+          <h3>
+            Total Inflow
+          </h3>
+
         </div>
 
-        <p id="totalInflow">₹0</p>
+        <p id="totalInflow">
+          ₹0
+        </p>
 
       </div>
 
@@ -160,10 +179,16 @@
       <div class="card">
 
         <div class="cardTop">
-          <h3>Net Cash Flow</h3>
+
+          <h3>
+            Net Cash Flow
+          </h3>
+
         </div>
 
-        <p id="netCashFlow">₹0</p>
+        <p id="netCashFlow">
+          ₹0
+        </p>
 
       </div>
 
@@ -174,10 +199,16 @@
       <div class="card">
 
         <div class="cardTop">
-          <h3>Ending Balance</h3>
+
+          <h3>
+            Ending Balance
+          </h3>
+
         </div>
 
-        <p id="endingBalance">₹0</p>
+        <p id="endingBalance">
+          ₹0
+        </p>
 
       </div>
 
@@ -188,10 +219,16 @@
       <div class="card">
 
         <div class="cardTop">
-          <h3>Outflow % of Inflow</h3>
+
+          <h3>
+            Outflow % of Inflow
+          </h3>
+
         </div>
 
-        <p id="outflowPercent">0%</p>
+        <p id="outflowPercent">
+          0%
+        </p>
 
       </div>
 
@@ -202,10 +239,16 @@
       <div class="card">
 
         <div class="cardTop">
-          <h3>Top Expense Category</h3>
+
+          <h3>
+            Top Expense Category
+          </h3>
+
         </div>
 
-        <p id="topExpense">-</p>
+        <p id="topExpense">
+          -
+        </p>
 
       </div>
 
@@ -218,9 +261,14 @@
     <div class="insights">
 
 
+
+      <!-- INSIGHT 1 -->
+
       <div class="insightCard">
 
-        <h3>Highest Expense Group</h3>
+        <h3>
+          Highest Expense Group
+        </h3>
 
         <p id="highestExpenseGroup">
           -
@@ -230,9 +278,13 @@
 
 
 
+      <!-- INSIGHT 2 -->
+
       <div class="insightCard">
 
-        <h3>Highest Inflow Source</h3>
+        <h3>
+          Highest Inflow Source
+        </h3>
 
         <p id="highestInflowSource">
           -
@@ -242,9 +294,13 @@
 
 
 
+      <!-- INSIGHT 3 -->
+
       <div class="insightCard">
 
-        <h3>Cash Flow Health</h3>
+        <h3>
+          Cash Flow Health
+        </h3>
 
         <p id="cashHealth">
           -
@@ -254,9 +310,13 @@
 
 
 
+      <!-- INSIGHT 4 -->
+
       <div class="insightCard">
 
-        <h3>Outflow Risk</h3>
+        <h3>
+          Outflow Risk
+        </h3>
 
         <p id="outflowRisk">
           -
@@ -271,6 +331,7 @@
     <!-- CHARTS -->
 
     <div class="charts">
+
 
 
       <!-- CHART 1 -->
@@ -376,6 +437,78 @@
         </div>
 
         <canvas id="outflowContributionChart"></canvas>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- DATA TABLE -->
+
+    <div class="tableSection">
+
+
+
+      <div class="tableHeader">
+
+        <h2>
+          Financial Transactions
+        </h2>
+
+
+
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search category..."
+        >
+
+      </div>
+
+
+
+      <div class="tableWrapper">
+
+        <table id="financeTable">
+
+
+
+          <thead>
+
+            <tr>
+
+              <th>
+                Month
+              </th>
+
+              <th>
+                Flow Type
+              </th>
+
+              <th>
+                Financial Group
+              </th>
+
+              <th>
+                Category
+              </th>
+
+              <th>
+                Amount
+              </th>
+
+            </tr>
+
+          </thead>
+
+
+
+          <tbody>
+
+          </tbody>
+
+        </table>
 
       </div>
 
