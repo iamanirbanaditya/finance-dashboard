@@ -10,37 +10,44 @@ body {
   font-family: Arial, sans-serif;
 }
 
-.container {
+.dashboard {
   padding: 30px;
 }
 
-.topbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.header {
   margin-bottom: 30px;
 }
 
-h1 {
+.header h1 {
   color: #C8102E;
+  font-size: 40px;
 }
 
-select {
-  padding: 10px;
-  border-radius: 8px;
+.filters {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.filters select {
+  padding: 12px;
+  border-radius: 10px;
   border: none;
+  background: #1e293b;
+  color: white;
 }
 
 .cards {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 20px;
   margin-bottom: 30px;
 }
 
 .card {
   background: #1e293b;
-  padding: 20px;
+  padding: 25px;
   border-radius: 16px;
 }
 
@@ -54,8 +61,19 @@ select {
   font-weight: bold;
 }
 
-.chartBox {
+.charts {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.chartCard {
   background: #1e293b;
   padding: 20px;
   border-radius: 16px;
+}
+
+.chartCard h2 {
+  margin-bottom: 20px;
+  font-size: 20px;
 }

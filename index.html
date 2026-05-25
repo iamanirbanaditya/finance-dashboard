@@ -3,48 +3,100 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-  <title>Finance Dashboard</title>
+  <title>Cash Flow Dashboard</title>
 
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
 
-  <div class="container">
+  <div class="dashboard">
 
-    <div class="topbar">
-      <h1>Finance Dashboard</h1>
+    <!-- HEADER -->
 
-      <select>
-        <option>January 2026</option>
-      </select>
+    <div class="header">
+      <h1>Cash Flow Dashboard</h1>
     </div>
+
+
+    <!-- FILTERS -->
+
+    <div class="filters">
+
+      <select id="departmentFilter">
+        <option>All Departments</option>
+      </select>
+
+      <select id="cashFlowFilter">
+        <option>All Cash Flow Types</option>
+      </select>
+
+      <select id="monthFilter">
+        <option>All Months</option>
+      </select>
+
+      <select id="viewFilter">
+        <option>Monthly View</option>
+      </select>
+
+    </div>
+
+
+    <!-- KPI CARDS -->
 
     <div class="cards">
 
       <div class="card">
-        <h3>Total Inflow</h3>
-        <p id="inflow">₹0</p>
+        <h3>Total Outflow</h3>
+        <p id="totalOutflow">₹0</p>
       </div>
 
       <div class="card">
-        <h3>Total Outflow</h3>
-        <p id="outflow">₹0</p>
+        <h3>Total Inflow</h3>
+        <p id="totalInflow">₹0</p>
       </div>
 
       <div class="card">
         <h3>Net Cash Flow</h3>
-        <p id="netcash">₹0</p>
+        <p id="netCashFlow">₹0</p>
+      </div>
+
+      <div class="card">
+        <h3>Ending Balance</h3>
+        <p id="endingBalance">₹0</p>
       </div>
 
     </div>
 
-    <div class="chartBox">
-      <canvas id="financeChart"></canvas>
+
+    <!-- CHARTS -->
+
+    <div class="charts">
+
+      <div class="chartCard">
+        <h2>Outflow & Inflow by Cash Flow Type</h2>
+        <canvas id="cashFlowTypeChart"></canvas>
+      </div>
+
+      <div class="chartCard">
+        <h2>Total Outflow by Category</h2>
+        <canvas id="categoryChart"></canvas>
+      </div>
+
+      <div class="chartCard">
+        <h2>Net Cash Flow by Month</h2>
+        <canvas id="monthChart"></canvas>
+      </div>
+
+      <div class="chartCard">
+        <h2>Ending Balance by Department</h2>
+        <canvas id="departmentChart"></canvas>
+      </div>
+
     </div>
 
   </div>
@@ -52,5 +104,4 @@
   <script src="script.js"></script>
 
 </body>
-
 </html>

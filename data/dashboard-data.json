@@ -1,0 +1,212 @@
+[
+  {
+    "month": "January",
+    "flowType": "Inflow",
+    "category": "Secured Loans",
+    "amount": 9378393
+  },
+  {
+    "month": "January",
+    "flowType": "Inflow",
+    "category": "Unsecured Loans",
+    "amount": 5000000
+  },
+  {
+    "month": "January",
+    "flowType": "Inflow",
+    "category": "Sundry Creditors",
+    "amount": 204176
+  },
+  {
+    "month": "January",
+    "flowType": "Inflow",
+    "category": "Liabilities for Expenses",
+    "amount": 47641
+  },
+  {
+    "month": "January",
+    "flowType": "Inflow",
+    "category": "Loans & Advances (Asset)",
+    "amount": 5500
+  },
+  {
+    "month": "January",
+    "flowType": "Inflow",
+    "category": "Sundry Debtors",
+    "amount": 21382488.83
+  },
+  {
+    "month": "January",
+    "flowType": "Inflow",
+    "category": "Miscelleneous Income",
+    "amount": 237.82
+  },
+  {
+    "month": "January",
+    "flowType": "Inflow",
+    "category": "Registration & License Fee",
+    "amount": 354300
+  },
+  {
+    "month": "January",
+    "flowType": "Inflow",
+    "category": "Commission & Incentive",
+    "amount": 5830
+  },
+  {
+    "month": "January",
+    "flowType": "Outflow",
+    "category": "Secured Loans",
+    "amount": 944968
+  },
+  {
+    "month": "January",
+    "flowType": "Outflow",
+    "category": "Unsecured Loans",
+    "amount": 4377767.89
+  },
+  {
+    "month": "January",
+    "flowType": "Outflow",
+    "category": "Sundry Creditors",
+    "amount": 23047394.09
+  },
+  {
+    "month": "January",
+    "flowType": "Outflow",
+    "category": "Liabilities for Expenses",
+    "amount": 4962976
+  },
+  {
+    "month": "January",
+    "flowType": "Outflow",
+    "category": "Security Deposit",
+    "amount": 102188
+  },
+  {
+    "month": "January",
+    "flowType": "Outflow",
+    "category": "435 Jessore Road Land",
+    "amount": 200000
+  },
+  {
+    "month": "January",
+    "flowType": "Outflow",
+    "category": "Plant & Machinery",
+    "amount": 30000
+  },
+  {
+    "month": "January",
+    "flowType": "Outflow",
+    "category": "Loans & Advances (Asset)",
+    "amount": 1020000
+  },
+  {
+    "month": "January",
+    "flowType": "Outflow",
+    "category": "Sundry Debtors",
+    "amount": 261853
+  },
+  {
+    "month": "January",
+    "flowType": "Outflow",
+    "category": "Other Current Assets",
+    "amount": 100000
+  },
+  {
+    "month": "January",
+    "flowType": "Outflow",
+    "category": "Logistics Charges",
+    "amount": 370
+  },
+  {
+    "month": "January",
+    "flowType": "Outflow",
+    "category": "Delivery Charges",
+    "amount": 2100
+  },
+  {
+    "month": "January",
+    "flowType": "Outflow",
+    "category": "Freight Charges",
+    "amount": 15272
+  },
+  {
+    "month": "January",
+    "flowType": "Outflow",
+    "category": "Admin expenses",
+    "amount": 20598
+  },
+  {
+    "month": "January",
+    "flowType": "Outflow",
+    "category": "Entertainment & Others",
+    "amount": 626
+  },
+  {
+    "month": "January",
+    "flowType": "Outflow",
+    "category": "Printing expenses",
+    "amount": 410
+  },
+  {
+    "month": "January",
+    "flowType": "Outflow",
+    "category": "Processing fees - Loan",
+    "amount": 180690
+  },
+  {
+    "month": "January",
+    "flowType": "Outflow",
+    "category": "R&D expenses",
+    "amount": 1360
+  },
+  {
+    "month": "January",
+    "flowType": "Outflow",
+    "category": "Registration & License Fee",
+    "amount": 360200
+  },
+  {
+    "month": "January",
+    "flowType": "Outflow",
+    "category": "Repair & Maintenance",
+    "amount": 5547
+  },
+  {
+    "month": "January",
+    "flowType": "Outflow",
+    "category": "Travelling expenses",
+    "amount": 88962
+  },
+  {
+    "month": "January",
+    "flowType": "Outflow",
+    "category": "Vehicle Delivery Charges",
+    "amount": 80000
+  },
+  {
+    "month": "January",
+    "flowType": "Outflow",
+    "category": "Bank Charges",
+    "amount": 3191.11
+  },
+  {
+    "month": "January",
+    "flowType": "Outflow",
+    "category": "Commission & Incentive",
+    "amount": 230480
+  },
+  {
+    "month": "January",
+    "flowType": "Outflow",
+    "category": "BANK CHARGES  & INTEREST CC A/C",
+    "amount": 350882
+  },
+  {
+    "month": "January",
+    "flowType": "Outflow",
+    "category": "Telephone & Mobile Charges",
+    "amount": 29418
+  }
+]
