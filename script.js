@@ -3,7 +3,7 @@ let allData = [];
 let cashFlowChart;
 let categoryChart;
 let monthChart;
-let departmentChart;
+let groupChart;
 
 
 
@@ -20,7 +20,7 @@ async function loadDashboard() {
 
   populateMonthFilter();
 
-  populateDepartmentFilter();
+  populateGroupFilter();
 
   populateCategoryFilter();
 
@@ -66,32 +66,32 @@ function populateMonthFilter() {
 
 
 
-// DEPARTMENT FILTER
+// FINANCIAL GROUP FILTER
 
-function populateDepartmentFilter() {
+function populateGroupFilter() {
 
-  const departmentFilter =
-    document.getElementById("departmentFilter");
-
-
-
-  const departments =
-    [...new Set(allData.map(item => item.flowType))];
+  const groupFilter =
+    document.getElementById("groupFilter");
 
 
 
-  departmentFilter.innerHTML =
+  const groups =
+    [...new Set(allData.map(item => item.group))];
+
+
+
+  groupFilter.innerHTML =
     `<option value="All">
-      All Departments
+      All Financial Groups
     </option>`;
 
 
 
-  departments.forEach(department => {
+  groups.forEach(group => {
 
-    departmentFilter.innerHTML +=
-      `<option value="${department}">
-        ${department}
+    groupFilter.innerHTML +=
+      `<option value="${group}">
+        ${group}
       </option>`;
 
   });
@@ -196,7 +196,7 @@ function updateDashboard(filteredData) {
 
   if (monthChart) monthChart.destroy();
 
-  if (departmentChart) departmentChart.destroy();
+  if (groupChart) groupChart.destroy();
 
 
 
@@ -239,16 +239,19 @@ function updateDashboard(filteredData) {
         responsive: true,
 
         plugins: {
+
           legend: {
             labels: {
               color: "white"
             }
           }
+
         },
 
         scales: {
 
           x: {
+
             ticks: {
               color: "white"
             },
@@ -256,9 +259,11 @@ function updateDashboard(filteredData) {
             grid: {
               color: "#334155"
             }
+
           },
 
           y: {
+
             ticks: {
               color: "white"
             },
@@ -266,6 +271,7 @@ function updateDashboard(filteredData) {
             grid: {
               color: "#334155"
             }
+
           }
 
         }
@@ -278,7 +284,7 @@ function updateDashboard(filteredData) {
 
 
   // CHART 2
-  // CATEGORY PIE
+  // CATEGORY DONUT
 
   const outflowData =
     filteredData.filter(
@@ -304,6 +310,7 @@ function updateDashboard(filteredData) {
             outflowData.map(item => item.amount),
 
           backgroundColor: [
+
             "#3b82f6",
             "#8b5cf6",
             "#f59e0b",
@@ -313,7 +320,10 @@ function updateDashboard(filteredData) {
             "#22c55e",
             "#f97316",
             "#06b6d4",
-            "#84cc16"
+            "#84cc16",
+            "#6366f1",
+            "#e11d48"
+
           ],
 
           borderWidth: 0
@@ -324,11 +334,17 @@ function updateDashboard(filteredData) {
       options: {
 
         plugins: {
+
           legend: {
+
+            position: "bottom",
+
             labels: {
               color: "white"
             }
+
           }
+
         }
 
       }
@@ -339,7 +355,7 @@ function updateDashboard(filteredData) {
 
 
   // CHART 3
-  // MONTH TREND
+  // NET CASH FLOW TREND
 
   const monthTotals = {};
 
@@ -354,11 +370,15 @@ function updateDashboard(filteredData) {
 
 
     if (item.flowType === "Inflow") {
+
       monthTotals[item.month] += item.amount;
+
     }
 
     else {
+
       monthTotals[item.month] -= item.amount;
+
     }
 
   });
@@ -384,13 +404,15 @@ function updateDashboard(filteredData) {
           borderColor: "#C8102E",
 
           backgroundColor:
-            "rgba(200,16,46,0.2)",
+            "rgba(200,16,46,0.15)",
 
           fill: true,
 
           tension: 0.4,
 
           pointBackgroundColor: "#ffffff",
+
+          pointBorderColor: "#C8102E",
 
           pointRadius: 5
 
@@ -400,16 +422,19 @@ function updateDashboard(filteredData) {
       options: {
 
         plugins: {
+
           legend: {
             labels: {
               color: "white"
             }
           }
+
         },
 
         scales: {
 
           x: {
+
             ticks: {
               color: "white"
             },
@@ -417,9 +442,11 @@ function updateDashboard(filteredData) {
             grid: {
               color: "#334155"
             }
+
           },
 
           y: {
+
             ticks: {
               color: "white"
             },
@@ -427,6 +454,7 @@ function updateDashboard(filteredData) {
             grid: {
               color: "#334155"
             }
+
           }
 
         }
@@ -439,25 +467,25 @@ function updateDashboard(filteredData) {
 
 
   // CHART 4
-  // CATEGORY TOTALS
+  // FINANCIAL GROUP ANALYSIS
 
-  const categoryTotals = {};
+  const groupTotals = {};
 
 
 
   filteredData.forEach(item => {
 
-    if (!categoryTotals[item.category]) {
-      categoryTotals[item.category] = 0;
+    if (!groupTotals[item.group]) {
+      groupTotals[item.group] = 0;
     }
 
-    categoryTotals[item.category] += item.amount;
+    groupTotals[item.group] += item.amount;
 
   });
 
 
 
-  departmentChart = new Chart(
+  groupChart = new Chart(
     document.getElementById("departmentChart"),
     {
 
@@ -465,36 +493,49 @@ function updateDashboard(filteredData) {
 
       data: {
 
-        labels: Object.keys(categoryTotals),
+        labels: Object.keys(groupTotals),
 
         datasets: [{
 
           label: "Amount",
 
-          data: Object.values(categoryTotals),
+          data: Object.values(groupTotals),
 
-          backgroundColor: "#3b82f6",
+          backgroundColor: [
+            "#06b6d4",
+            "#3b82f6",
+            "#8b5cf6",
+            "#ec4899",
+            "#f97316",
+            "#22c55e",
+            "#eab308"
+          ],
 
-          borderRadius: 10
+          borderRadius: 10,
+
+          borderSkipped: false
 
         }]
       },
 
       options: {
 
-        indexAxis: "y",
+        responsive: true,
 
         plugins: {
+
           legend: {
             labels: {
               color: "white"
             }
           }
+
         },
 
         scales: {
 
           x: {
+
             ticks: {
               color: "white"
             },
@@ -502,9 +543,11 @@ function updateDashboard(filteredData) {
             grid: {
               color: "#334155"
             }
+
           },
 
           y: {
+
             ticks: {
               color: "white"
             },
@@ -512,6 +555,7 @@ function updateDashboard(filteredData) {
             grid: {
               color: "#334155"
             }
+
           }
 
         }
@@ -535,8 +579,8 @@ function applyFilters() {
   const selectedFlow =
     document.getElementById("cashFlowFilter").value;
 
-  const selectedDepartment =
-    document.getElementById("departmentFilter").value;
+  const selectedGroup =
+    document.getElementById("groupFilter").value;
 
   const selectedCategory =
     document.getElementById("categoryFilter").value;
@@ -573,13 +617,13 @@ function applyFilters() {
 
 
 
-  // DEPARTMENT FILTER
+  // GROUP FILTER
 
-  if (selectedDepartment !== "All") {
+  if (selectedGroup !== "All") {
 
     filteredData =
       filteredData.filter(
-        item => item.flowType === selectedDepartment
+        item => item.group === selectedGroup
       );
 
   }
@@ -613,7 +657,7 @@ document.getElementById("monthFilter")
 document.getElementById("cashFlowFilter")
   .addEventListener("change", applyFilters);
 
-document.getElementById("departmentFilter")
+document.getElementById("groupFilter")
   .addEventListener("change", applyFilters);
 
 document.getElementById("categoryFilter")

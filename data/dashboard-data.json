@@ -2,762 +2,889 @@
   {
     "month": "April",
     "flowType": "Inflow",
+    "group": "Loans (Liability)",
     "category": "Unsecured Loans",
     "amount": 631157
   },
   {
     "month": "April",
     "flowType": "Inflow",
+    "group": "Current Liabilities",
     "category": "Sundry Creditors",
     "amount": 48875
   },
   {
     "month": "April",
     "flowType": "Inflow",
+    "group": "Current Liabilities",
     "category": "Liabilities for Expenses",
     "amount": 27858
   },
   {
     "month": "April",
     "flowType": "Inflow",
+    "group": "Current Assets",
     "category": "Loans & Advances (Asset)",
     "amount": 71223
   },
   {
     "month": "April",
     "flowType": "Inflow",
+    "group": "Current Assets",
     "category": "Sundry Debtors",
     "amount": 25003461.09
   },
   {
     "month": "April",
     "flowType": "Inflow",
+    "group": "Current Assets",
     "category": "Suspense Account",
     "amount": 3360
   },
   {
     "month": "April",
     "flowType": "Outflow",
+    "group": "Loans (Liability)",
     "category": "Secured Loans",
     "amount": 1825981
   },
   {
     "month": "April",
     "flowType": "Outflow",
+    "group": "Loans (Liability)",
     "category": "Unsecured Loans",
     "amount": 177767.89
   },
   {
     "month": "April",
     "flowType": "Outflow",
+    "group": "Current Liabilities",
     "category": "Sundry Creditors",
     "amount": 16495213.44
   },
   {
     "month": "April",
     "flowType": "Outflow",
+    "group": "Current Liabilities",
     "category": "Liabilities for Expenses",
     "amount": 4287036
   },
   {
     "month": "April",
     "flowType": "Outflow",
+    "group": "Current Liabilities",
     "category": "Security Deposit",
     "amount": 95630
   },
   {
     "month": "April",
     "flowType": "Outflow",
+    "group": "Current Liabilities",
     "category": "TDS Liabilities",
     "amount": 859746
   },
   {
     "month": "April",
     "flowType": "Outflow",
+    "group": "Current Liabilities",
     "category": "FD With HDFC Bank",
     "amount": 10000000
   },
   {
     "month": "April",
     "flowType": "Outflow",
+    "group": "Current Liabilities",
     "category": "Vedika Credit Capital (Choice Finserv)",
     "amount": 5000000
   },
   {
     "month": "April",
     "flowType": "Outflow",
+    "group": "Current Assets",
     "category": "Loans & Advances (Asset)",
     "amount": 389950
   },
   {
     "month": "April",
     "flowType": "Outflow",
+    "group": "Current Assets",
     "category": "Sundry Debtors",
     "amount": 500000
   },
   {
     "month": "April",
     "flowType": "Outflow",
+    "group": "Current Assets",
     "category": "Local Purchase - Raw Materials",
     "amount": 30582
   },
   {
     "month": "April",
     "flowType": "Outflow",
+    "group": "Direct Expenses",
     "category": "Logistics Charges",
     "amount": 23359
   },
   {
     "month": "April",
     "flowType": "Outflow",
+    "group": "Direct Expenses",
     "category": "Power & Fuel",
     "amount": 58220
   },
   {
     "month": "April",
     "flowType": "Outflow",
+    "group": "Direct Expenses",
     "category": "Delivery Charges",
     "amount": 780
   },
   {
     "month": "April",
     "flowType": "Outflow",
+    "group": "Direct Expenses",
     "category": "Freight Charges",
     "amount": 10109
   },
   {
     "month": "April",
     "flowType": "Outflow",
+    "group": "Direct Expenses",
     "category": "Labour Charges",
     "amount": 5038
   },
   {
     "month": "April",
     "flowType": "Outflow",
+    "group": "Indirect Incomes",
     "category": "Accrude Interest on Vedika Capital",
     "amount": 4731.03
   },
   {
     "month": "April",
     "flowType": "Outflow",
+    "group": "Indirect Expenses",
     "category": "Admin expenses",
     "amount": 2037
   },
   {
     "month": "April",
     "flowType": "Outflow",
+    "group": "Indirect Expenses",
     "category": "Donations",
     "amount": 977
   },
   {
     "month": "April",
     "flowType": "Outflow",
+    "group": "Indirect Expenses",
     "category": "Entertainment & Others",
     "amount": 200
   },
   {
     "month": "April",
     "flowType": "Outflow",
+    "group": "Indirect Expenses",
     "category": "Marketing expenses",
     "amount": 5169
   },
   {
     "month": "April",
     "flowType": "Outflow",
+    "group": "Indirect Expenses",
     "category": "Miscellaneous expenses",
     "amount": 847.53
   },
   {
     "month": "April",
     "flowType": "Outflow",
+    "group": "Indirect Expenses",
     "category": "Printing expenses",
     "amount": 715
   },
   {
     "month": "April",
     "flowType": "Outflow",
+    "group": "Indirect Expenses",
     "category": "Professional & Consultancy Charges",
     "amount": 39000
   },
   {
     "month": "April",
     "flowType": "Outflow",
+    "group": "Indirect Expenses",
     "category": "R&D expenses",
     "amount": 5170
   },
   {
     "month": "April",
     "flowType": "Outflow",
+    "group": "Indirect Expenses",
     "category": "Repair & Maintenance",
     "amount": 35792
   },
   {
     "month": "April",
     "flowType": "Outflow",
+    "group": "Indirect Expenses",
     "category": "Travelling expenses",
     "amount": 185823
   },
   {
     "month": "April",
     "flowType": "Outflow",
+    "group": "Indirect Expenses",
     "category": "Vehicle Delivery Charges",
     "amount": 60038.94
   },
   {
     "month": "April",
     "flowType": "Outflow",
+    "group": "Indirect Expenses",
     "category": "Bank Charges",
     "amount": 9363.32
   },
   {
     "month": "April",
     "flowType": "Outflow",
+    "group": "Indirect Expenses",
     "category": "Commission & Incentive",
     "amount": 17000
   },
   {
     "month": "April",
     "flowType": "Outflow",
+    "group": "Indirect Expenses",
     "category": "Driver Hire Charges",
     "amount": 15996
   },
   {
     "month": "April",
     "flowType": "Outflow",
+    "group": "Interest on Finance",
     "category": "BANK CHARGES  & INTEREST CC A/C",
     "amount": 208700
   },
   {
     "month": "April",
     "flowType": "Outflow",
+    "group": "Internet & Communication Exp",
     "category": "Telephone & Mobile Charges",
     "amount": 49832
   },
   {
     "month": "February",
     "flowType": "Inflow",
+    "group": "Current Assets",
     "category": "Loans & Advances (Asset)",
     "amount": 64580
   },
   {
     "month": "February",
     "flowType": "Inflow",
+    "group": "Current Assets",
     "category": "Sundry Debtors",
     "amount": 18500789.76
   },
   {
     "month": "February",
     "flowType": "Inflow",
+    "group": "Indirect Incomes",
     "category": "Miscelleneous Income",
     "amount": 2
   },
   {
     "month": "February",
     "flowType": "Outflow",
+    "group": "Loans (Liability)",
     "category": "Secured Loans",
     "amount": 2030060
   },
   {
     "month": "February",
     "flowType": "Outflow",
+    "group": "Loans (Liability)",
     "category": "Unsecured Loans",
     "amount": 177767.89
   },
   {
     "month": "February",
     "flowType": "Outflow",
+    "group": "Current Liabilities",
     "category": "Sundry Creditors",
     "amount": 16859715.09
   },
   {
     "month": "February",
     "flowType": "Outflow",
+    "group": "Current Liabilities",
     "category": "Liabilities for Expenses",
     "amount": 3276765
   },
   {
     "month": "February",
     "flowType": "Outflow",
+    "group": "Current Assets",
     "category": "Loans & Advances (Asset)",
     "amount": 836510
   },
   {
     "month": "February",
     "flowType": "Outflow",
+    "group": "Direct Expenses",
     "category": "Canteen Account",
     "amount": 7500
   },
   {
     "month": "February",
     "flowType": "Outflow",
+    "group": "Direct Expenses",
     "category": "Delivery Charges",
     "amount": 11350
   },
   {
     "month": "February",
     "flowType": "Outflow",
+    "group": "Indirect Expenses",
     "category": "Admin expenses",
     "amount": 74732
   },
   {
     "month": "February",
     "flowType": "Outflow",
+    "group": "Indirect Expenses",
     "category": "Housekeeping expenses",
     "amount": 100
   },
   {
     "month": "February",
     "flowType": "Outflow",
+    "group": "Indirect Expenses",
     "category": "Printing expenses",
     "amount": 639
   },
   {
     "month": "February",
     "flowType": "Outflow",
+    "group": "Indirect Expenses",
     "category": "R&D expenses",
     "amount": 11817
   },
   {
     "month": "February",
     "flowType": "Outflow",
+    "group": "Indirect Expenses",
     "category": "Repair & Maintenance",
     "amount": 5700
   },
   {
     "month": "February",
     "flowType": "Outflow",
+    "group": "Indirect Expenses",
     "category": "Travelling expenses",
     "amount": 96725
   },
   {
     "month": "February",
     "flowType": "Outflow",
+    "group": "Indirect Expenses",
     "category": "Vehicle Delivery Charges",
     "amount": 60000
   },
   {
     "month": "February",
     "flowType": "Outflow",
+    "group": "Indirect Expenses",
     "category": "Bank Charges",
     "amount": 3109.98
   },
   {
     "month": "February",
     "flowType": "Outflow",
+    "group": "Indirect Expenses",
     "category": "Brokerage & Commission",
     "amount": 9094
   },
   {
     "month": "February",
     "flowType": "Outflow",
+    "group": "Indirect Expenses",
     "category": "Commission & Incentive",
     "amount": 127000
   },
   {
     "month": "February",
     "flowType": "Outflow",
+    "group": "Indirect Expenses",
     "category": "Staff Salary",
     "amount": 7742
   },
   {
     "month": "February",
     "flowType": "Outflow",
+    "group": "Interest on Finance",
     "category": "BANK CHARGES  & INTEREST CC A/C",
     "amount": 293162
   },
   {
     "month": "February",
     "flowType": "Outflow",
+    "group": "Internet & Communication Exp",
     "category": "Telephone & Mobile Charges",
     "amount": 1132
   },
   {
     "month": "January",
     "flowType": "Inflow",
+    "group": "Loans (Liability)",
     "category": "Secured Loans",
     "amount": 9378393
   },
   {
     "month": "January",
     "flowType": "Inflow",
+    "group": "Loans (Liability)",
     "category": "Unsecured Loans",
     "amount": 5000000
   },
   {
     "month": "January",
     "flowType": "Inflow",
+    "group": "Current Liabilities",
     "category": "Sundry Creditors",
     "amount": 204176
   },
   {
     "month": "January",
     "flowType": "Inflow",
+    "group": "Current Liabilities",
     "category": "Liabilities for Expenses",
     "amount": 47641
   },
   {
     "month": "January",
     "flowType": "Inflow",
+    "group": "Current Assets",
     "category": "Loans & Advances (Asset)",
     "amount": 5500
   },
   {
     "month": "January",
     "flowType": "Inflow",
+    "group": "Current Assets",
     "category": "Sundry Debtors",
     "amount": 21382488.83
   },
   {
     "month": "January",
     "flowType": "Inflow",
+    "group": "Indirect Incomes",
     "category": "Miscelleneous Income",
     "amount": 237.82
   },
   {
     "month": "January",
     "flowType": "Inflow",
+    "group": "Indirect Expenses",
     "category": "Registration & License Fee",
     "amount": 354300
   },
   {
     "month": "January",
     "flowType": "Inflow",
+    "group": "Indirect Expenses",
     "category": "Commission & Incentive",
     "amount": 5830
   },
   {
     "month": "January",
     "flowType": "Outflow",
+    "group": "Loans (Liability)",
     "category": "Secured Loans",
     "amount": 944968
   },
   {
     "month": "January",
     "flowType": "Outflow",
+    "group": "Loans (Liability)",
     "category": "Unsecured Loans",
     "amount": 4377767.89
   },
   {
     "month": "January",
     "flowType": "Outflow",
+    "group": "Current Liabilities",
     "category": "Sundry Creditors",
     "amount": 23047394.09
   },
   {
     "month": "January",
     "flowType": "Outflow",
+    "group": "Current Liabilities",
     "category": "Liabilities for Expenses",
     "amount": 4962976
   },
   {
     "month": "January",
     "flowType": "Outflow",
+    "group": "Current Liabilities",
     "category": "Security Deposit",
     "amount": 102188
   },
   {
     "month": "January",
     "flowType": "Outflow",
+    "group": "Fixed Assets",
     "category": "435 Jessore Road Land",
     "amount": 200000
   },
   {
     "month": "January",
     "flowType": "Outflow",
+    "group": "Fixed Assets",
     "category": "Plant & Machinery",
     "amount": 30000
   },
   {
     "month": "January",
     "flowType": "Outflow",
+    "group": "Current Assets",
     "category": "Loans & Advances (Asset)",
     "amount": 1020000
   },
   {
     "month": "January",
     "flowType": "Outflow",
+    "group": "Current Assets",
     "category": "Sundry Debtors",
     "amount": 261853
   },
   {
     "month": "January",
     "flowType": "Outflow",
+    "group": "Current Assets",
     "category": "Other Current Assets",
     "amount": 100000
   },
   {
     "month": "January",
     "flowType": "Outflow",
+    "group": "Direct Expenses",
     "category": "Logistics Charges",
     "amount": 370
   },
   {
     "month": "January",
     "flowType": "Outflow",
+    "group": "Direct Expenses",
     "category": "Delivery Charges",
     "amount": 2100
   },
   {
     "month": "January",
     "flowType": "Outflow",
+    "group": "Direct Expenses",
     "category": "Freight Charges",
     "amount": 15272
   },
   {
     "month": "January",
     "flowType": "Outflow",
+    "group": "Indirect Expenses",
     "category": "Admin expenses",
     "amount": 20598
   },
   {
     "month": "January",
     "flowType": "Outflow",
+    "group": "Indirect Expenses",
     "category": "Entertainment & Others",
     "amount": 626
   },
   {
     "month": "January",
     "flowType": "Outflow",
+    "group": "Indirect Expenses",
     "category": "Printing expenses",
     "amount": 410
   },
   {
     "month": "January",
     "flowType": "Outflow",
+    "group": "Indirect Expenses",
     "category": "Processing fees - Loan",
     "amount": 180690
   },
   {
     "month": "January",
     "flowType": "Outflow",
+    "group": "Indirect Expenses",
     "category": "R&D expenses",
     "amount": 1360
   },
   {
     "month": "January",
     "flowType": "Outflow",
+    "group": "Indirect Expenses",
     "category": "Registration & License Fee",
     "amount": 360200
   },
   {
     "month": "January",
     "flowType": "Outflow",
+    "group": "Indirect Expenses",
     "category": "Repair & Maintenance",
     "amount": 5547
   },
   {
     "month": "January",
     "flowType": "Outflow",
+    "group": "Indirect Expenses",
     "category": "Travelling expenses",
     "amount": 88962
   },
   {
     "month": "January",
     "flowType": "Outflow",
+    "group": "Indirect Expenses",
     "category": "Vehicle Delivery Charges",
     "amount": 80000
   },
   {
     "month": "January",
     "flowType": "Outflow",
+    "group": "Indirect Expenses",
     "category": "Bank Charges",
     "amount": 3191.11
   },
   {
     "month": "January",
     "flowType": "Outflow",
+    "group": "Indirect Expenses",
     "category": "Commission & Incentive",
     "amount": 230480
   },
   {
     "month": "January",
     "flowType": "Outflow",
+    "group": "Interest on Finance",
     "category": "BANK CHARGES  & INTEREST CC A/C",
     "amount": 350882
   },
   {
     "month": "January",
     "flowType": "Outflow",
+    "group": "Internet & Communication Exp",
     "category": "Telephone & Mobile Charges",
     "amount": 29418
   },
   {
     "month": "March",
     "flowType": "Inflow",
+    "group": "Loans (Liability)",
     "category": "Unsecured Loans",
     "amount": 14000000
   },
   {
     "month": "March",
     "flowType": "Inflow",
+    "group": "Current Assets",
     "category": "Loans & Advances (Asset)",
     "amount": 1301441
   },
   {
     "month": "March",
     "flowType": "Inflow",
+    "group": "Current Assets",
     "category": "Sundry Debtors",
     "amount": 34552711.52
   },
   {
     "month": "March",
     "flowType": "Inflow",
+    "group": "Indirect Incomes",
     "category": "Miscelleneous Income",
     "amount": 5
   },
   {
     "month": "March",
     "flowType": "Outflow",
+    "group": "Loans (Liability)",
     "category": "Secured Loans",
     "amount": 1836800
   },
   {
     "month": "March",
     "flowType": "Outflow",
+    "group": "Loans (Liability)",
     "category": "Unsecured Loans",
     "amount": 177767.89
   },
   {
     "month": "March",
     "flowType": "Outflow",
+    "group": "Current Liabilities",
     "category": "Sundry Creditors",
     "amount": 18590708
   },
   {
     "month": "March",
     "flowType": "Outflow",
+    "group": "Current Liabilities",
     "category": "Liabilities for Expenses",
     "amount": 3477039
   },
   {
     "month": "March",
     "flowType": "Outflow",
+    "group": "Current Assets",
     "category": "Loans & Advances (Asset)",
     "amount": 1455737
   },
   {
     "month": "March",
     "flowType": "Outflow",
+    "group": "Current Assets",
     "category": "Other Current Assets",
     "amount": 2200000
   },
   {
     "month": "March",
     "flowType": "Outflow",
+    "group": "Direct Expenses",
     "category": "Barcode Registration",
     "amount": 85582
   },
   {
     "month": "March",
     "flowType": "Outflow",
+    "group": "Direct Expenses",
     "category": "Canteen Account",
     "amount": 2500
   },
   {
     "month": "March",
     "flowType": "Outflow",
+    "group": "Direct Expenses",
     "category": "Delivery Charges",
     "amount": 60
   },
   {
     "month": "March",
     "flowType": "Outflow",
+    "group": "Direct Expenses",
     "category": "Freight Charges",
     "amount": 208
   },
   {
     "month": "March",
     "flowType": "Outflow",
+    "group": "Indirect Expenses",
     "category": "Admin expenses",
     "amount": 52578
   },
   {
     "month": "March",
     "flowType": "Outflow",
+    "group": "Indirect Expenses",
     "category": "Advertisement & Marketing expenses",
     "amount": 8000
   },
   {
     "month": "March",
     "flowType": "Outflow",
+    "group": "Indirect Expenses",
     "category": "Entertainment & Others",
     "amount": 4693
   },
   {
     "month": "March",
     "flowType": "Outflow",
+    "group": "Indirect Expenses",
     "category": "Housekeeping expenses",
     "amount": 540
   },
   {
     "month": "March",
     "flowType": "Outflow",
+    "group": "Indirect Expenses",
     "category": "Insurance Charges",
     "amount": 425234.75
   },
   {
     "month": "March",
     "flowType": "Outflow",
+    "group": "Indirect Expenses",
     "category": "Miscellaneous expenses",
     "amount": 6900
   },
   {
     "month": "March",
     "flowType": "Outflow",
+    "group": "Indirect Expenses",
     "category": "Printing expenses",
     "amount": 480
   },
   {
     "month": "March",
     "flowType": "Outflow",
+    "group": "Indirect Expenses",
     "category": "R&D expenses",
     "amount": 2040
   },
   {
     "month": "March",
     "flowType": "Outflow",
+    "group": "Indirect Expenses",
     "category": "Registration & License Fee",
     "amount": 59000
   },
   {
     "month": "March",
     "flowType": "Outflow",
+    "group": "Indirect Expenses",
     "category": "Repair & Maintenance",
     "amount": 15761
   },
   {
     "month": "March",
     "flowType": "Outflow",
+    "group": "Indirect Expenses",
     "category": "Travelling expenses",
     "amount": 202383
   },
   {
     "month": "March",
     "flowType": "Outflow",
+    "group": "Indirect Expenses",
     "category": "Vehicle Delivery Charges",
     "amount": 80038.94
   },
   {
     "month": "March",
     "flowType": "Outflow",
+    "group": "Indirect Expenses",
     "category": "Bank Charges",
     "amount": 4283.29
   },
   {
     "month": "March",
     "flowType": "Outflow",
+    "group": "Indirect Expenses",
     "category": "Commission & Incentive",
     "amount": 10000
   },
   {
     "month": "March",
     "flowType": "Outflow",
+    "group": "Interest on Finance",
     "category": "BANK CHARGES  & INTEREST CC A/C",
     "amount": 327293
   },
   {
     "month": "March",
     "flowType": "Outflow",
+    "group": "Internet & Communication Exp",
     "category": "Telephone & Mobile Charges",
     "amount": 18132
   }

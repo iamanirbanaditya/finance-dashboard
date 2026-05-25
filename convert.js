@@ -8,10 +8,7 @@ const path = require("path");
 
 const excelFolder = "./excel-data";
 
-
-
-const files =
-  fs.readdirSync(excelFolder);
+const files = fs.readdirSync(excelFolder);
 
 
 
@@ -47,9 +44,9 @@ files.forEach(file => {
 
   let currentFlow = "";
 
+  let currentGroup = "";
 
 
-  // MONTH NAME
 
   const month =
     file.split("'")[0];
@@ -86,6 +83,38 @@ files.forEach(file => {
 
 
 
+    // MAIN GROUPS
+
+    const groups = [
+
+      "Loans (Liability)",
+
+      "Current Liabilities",
+
+      "Current Assets",
+
+      "Indirect Incomes",
+
+      "Indirect Expenses",
+
+      "Fixed Assets",
+
+      "Direct Expenses",
+
+      "Interest on Finance",
+
+      "Internet & Communication Exp"
+
+    ];
+
+
+
+    if (groups.includes(col1)) {
+      currentGroup = col1;
+    }
+
+
+
     // CATEGORY + AMOUNT
 
     if (
@@ -98,6 +127,8 @@ files.forEach(file => {
         month: month,
 
         flowType: currentFlow,
+
+        group: currentGroup,
 
         category: col1,
 
@@ -123,5 +154,5 @@ fs.writeFileSync(
 
 
 console.log(
-  "Multi-month dashboard-data.json created!"
+  "Updated dashboard-data.json created!"
 );
