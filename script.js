@@ -58,6 +58,36 @@ function populateMonthFilter() {
 
 }
 
+function populateDepartmentFilter() {
+
+  const departmentFilter =
+    document.getElementById("departmentFilter");
+
+
+
+  const departments =
+    [...new Set(allData.map(item => item.category))];
+
+
+
+  departmentFilter.innerHTML =
+    `<option value="All">
+      All Departments
+    </option>`;
+
+
+
+  departments.forEach(department => {
+
+    departmentFilter.innerHTML +=
+      `<option value="${department}">
+        ${department}
+      </option>`;
+
+  });
+
+}
+
 
 
 // MAIN DASHBOARD UPDATE
@@ -306,6 +336,9 @@ function applyFilters() {
   const selectedFlow =
     document.getElementById("cashFlowFilter").value;
 
+  const selectedDepartment =
+    document.getElementById("departmentFilter").value;
+
 
 
   let filteredData = allData;
@@ -337,6 +370,15 @@ function applyFilters() {
   }
 
 
+  if (selectedDepartment !== "All") {
+
+    filteredData =
+      filteredData.filter(
+        item => item.category === selectedDepartment
+      );
+
+  }
+
 
   updateDashboard(filteredData);
 
@@ -352,6 +394,10 @@ document.getElementById("monthFilter")
 
 
 document.getElementById("cashFlowFilter")
+  .addEventListener("change", applyFilters);
+
+
+  document.getElementById("departmentFilter")
   .addEventListener("change", applyFilters);
 
 
