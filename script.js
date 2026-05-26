@@ -6,45 +6,83 @@ let monthChart;
 let groupChart;
 let topInflowChart;
 let topExpenseChart;
-let monthlyPercentageChart;
 
 
 
-/* =========================
-   FORMAT MONEY
-========================= */
+// =====================================
+// FORMAT MONEY
+// =====================================
 
 function formatIndianCurrency(num) {
 
-  if (!num) return "0";
-
-  if (Math.abs(num) >= 10000000) {
-
-    return (
-      (num / 10000000).toFixed(2)
-      + " Cr"
-    );
-
+  if (num >= 10000000) {
+    return (num / 10000000).toFixed(2) + " Cr";
   }
 
-  if (Math.abs(num) >= 100000) {
-
-    return (
-      (num / 100000).toFixed(2)
-      + " L"
-    );
-
+  if (num >= 100000) {
+    return (num / 100000).toFixed(2) + " L";
   }
 
-  return num.toLocaleString("en-IN");
+  return Number(num).toLocaleString("en-IN");
 
 }
 
 
 
-/* =========================
-   LAST UPDATED
-========================= */
+// =====================================
+// COMMON TOOLTIP
+// =====================================
+
+function commonTooltip() {
+
+  return {
+
+    backgroundColor: "#111827",
+
+    titleColor: "#ffffff",
+
+    bodyColor: "#ffffff",
+
+    borderColor: "#334155",
+
+    borderWidth: 1,
+
+    padding: 12,
+
+    displayColors: true,
+
+    callbacks: {
+
+      label: function(context) {
+
+        let label =
+          context.dataset.label || "";
+
+        if (label) {
+          label += ": ";
+        }
+
+        label +=
+          "₹" +
+          formatIndianCurrency(
+            context.raw
+          );
+
+        return label;
+
+      }
+
+    }
+
+  };
+
+}
+
+
+
+// =====================================
+// LAST UPDATED
+// =====================================
 
 function updateLastUpdated() {
 
@@ -59,20 +97,9 @@ function updateLastUpdated() {
 
 
 
-/* =========================
-   CHART DEFAULTS
-========================= */
-
-Chart.defaults.color = "#cbd5e1";
-
-Chart.defaults.font.family =
-  "Arial";
-
-
-
-/* =========================
-   LOAD DASHBOARD
-========================= */
+// =====================================
+// LOAD DASHBOARD
+// =====================================
 
 async function loadDashboard() {
 
@@ -86,20 +113,18 @@ async function loadDashboard() {
   allData = await response.json();
 
   populateMonthFilter();
-
   populateGroupFilter();
-
   populateCategoryFilter();
 
-  applyFilters();
+  updateDashboard(allData);
 
 }
 
 
 
-/* =========================
-   MONTH FILTER
-========================= */
+// =====================================
+// MONTH FILTER
+// =====================================
 
 function populateMonthFilter() {
 
@@ -121,11 +146,9 @@ function populateMonthFilter() {
   months.forEach(month => {
 
     monthFilter.innerHTML +=
-    `
-    <option value="${month}">
-      ${month}
-    </option>
-    `;
+      `<option value="${month}">
+        ${month}
+      </option>`;
 
   });
 
@@ -133,9 +156,9 @@ function populateMonthFilter() {
 
 
 
-/* =========================
-   GROUP FILTER
-========================= */
+// =====================================
+// GROUP FILTER
+// =====================================
 
 function populateGroupFilter() {
 
@@ -150,20 +173,16 @@ function populateGroupFilter() {
     )];
 
   groupFilter.innerHTML =
-    `
-    <option value="All">
+    `<option value="All">
       All Financial Groups
-    </option>
-    `;
+    </option>`;
 
   groups.forEach(group => {
 
     groupFilter.innerHTML +=
-    `
-    <option value="${group}">
-      ${group}
-    </option>
-    `;
+      `<option value="${group}">
+        ${group}
+      </option>`;
 
   });
 
@@ -171,9 +190,9 @@ function populateGroupFilter() {
 
 
 
-/* =========================
-   CATEGORY FILTER
-========================= */
+// =====================================
+// CATEGORY FILTER
+// =====================================
 
 function populateCategoryFilter(
   selectedGroup = "All"
@@ -205,20 +224,16 @@ function populateCategoryFilter(
     )];
 
   categoryFilter.innerHTML =
-    `
-    <option value="All">
+    `<option value="All">
       All Categories
-    </option>
-    `;
+    </option>`;
 
   categories.forEach(category => {
 
     categoryFilter.innerHTML +=
-    `
-    <option value="${category}">
-      ${category}
-    </option>
-    `;
+      `<option value="${category}">
+        ${category}
+      </option>`;
 
   });
 
@@ -226,11 +241,15 @@ function populateCategoryFilter(
 
 
 
-/* =========================
-   UPDATE DASHBOARD
-========================= */
+// =====================================
+// UPDATE DASHBOARD
+// =====================================
 
 function updateDashboard(filteredData) {
+
+  // =====================================
+  // TOTALS
+  // =====================================
 
   const totalInflow =
     filteredData
@@ -261,17 +280,25 @@ function updateDashboard(filteredData) {
 
   const outflowPercent =
     totalInflow > 0
-      ? (
-          (totalOutflow /
-            totalInflow) * 100
-        ).toFixed(1)
-      : 0;
+    ? (
+        totalOutflow /
+        totalInflow
+      ) * 100
+    : 0;
+
+  const monthlyOutflowPercent =
+    totalInflow > 0
+    ? (
+        netCashFlow /
+        totalInflow
+      ) * 100
+    : 0;
 
 
 
-  /* =========================
-     KPI UPDATE
-  ========================= */
+  // =====================================
+  // KPI UPDATE
+  // =====================================
 
   document.getElementById(
     "totalInflow"
@@ -298,21 +325,22 @@ function updateDashboard(filteredData) {
     );
 
   document.getElementById(
-    "endingBalance"
-  ).innerText =
-    "₹" +
-    formatIndianCurrency(
-      netCashFlow
-    );
-
-  document.getElementById(
     "outflowPercent"
   ).innerText =
-    outflowPercent + "%";
+    outflowPercent.toFixed(1) + "%";
+
+  document.getElementById(
+    "monthlyOutflowPercent"
+  ).innerText =
+    monthlyOutflowPercent.toFixed(1) + "%";
 
 
 
-  const outflowData =
+  // =====================================
+  // INFLOW & OUTFLOW DATA
+  // =====================================
+
+  const expenseData =
     filteredData.filter(
       item =>
         item.flowType === "Outflow"
@@ -326,122 +354,105 @@ function updateDashboard(filteredData) {
 
 
 
-  /* =========================
-     EXPENSE TOTALS
-  ========================= */
+  // =====================================
+  // TOP EXPENSE
+  // =====================================
 
-  const expenseTotals = {};
+  const topExpense =
+    [...expenseData]
+    .sort(
+      (a,b) =>
+        b.amount - a.amount
+    )[0];
 
-  outflowData.forEach(item => {
-
-    if (
-      !expenseTotals[item.category]
-    ) {
-
-      expenseTotals[item.category] = 0;
-
-    }
-
-    expenseTotals[item.category] +=
-      item.amount;
-
-  });
-
-
-
-  const sortedExpenses =
-    Object.entries(
-      expenseTotals
-    ).sort((a, b) => b[1] - a[1]);
-
-
-
-  if (sortedExpenses.length > 0) {
+  if (topExpense) {
 
     document.getElementById(
       "topExpense"
     ).innerText =
-      sortedExpenses[0][0];
+      topExpense.category;
 
     document.getElementById(
       "highestRiskArea"
     ).innerText =
-      sortedExpenses[0][0];
+      topExpense.category;
+
+    document.getElementById(
+      "highestExpenseGroup"
+    ).innerText =
+      topExpense.group;
 
   }
 
 
 
-  document.getElementById(
-    "highestExpenseGroup"
-  ).innerText =
-    filteredData[0]?.group || "-";
+  // =====================================
+  // TOP INFLOW
+  // =====================================
 
-
-
-  const highestInflow =
-    inflowData.sort(
-      (a, b) =>
+  const topInflow =
+    [...inflowData]
+    .sort(
+      (a,b) =>
         b.amount - a.amount
     )[0];
 
-
-
-  if (highestInflow) {
+  if (topInflow) {
 
     document.getElementById(
       "highestInflowSource"
     ).innerText =
-      highestInflow.category;
+      topInflow.category;
 
   }
 
 
+
+  // =====================================
+  // CASH HEALTH
+  // =====================================
 
   let health = "Healthy";
 
   if (outflowPercent > 80) {
-
     health = "Critical";
-
   }
 
   else if (outflowPercent > 60) {
-
     health = "Warning";
-
   }
 
   document.getElementById(
     "cashHealth"
-  ).innerText = health;
+  ).innerText =
+    health;
 
   document.getElementById(
     "financialStatus"
-  ).innerText = health;
+  ).innerText =
+    health;
 
   document.getElementById(
     "outflowRisk"
   ).innerText =
-    outflowPercent + "%";
+    outflowPercent.toFixed(1) + "%";
 
 
+
+  // =====================================
+  // EXEC SUMMARY
+  // =====================================
 
   document.getElementById(
     "executiveSummary"
   ).innerText =
-    `
-    Total inflow is ₹${formatIndianCurrency(totalInflow)}
-    while outflow is ₹${formatIndianCurrency(totalOutflow)}.
-    Current net cash flow stands at
-    ₹${formatIndianCurrency(netCashFlow)}.
-    `;
+    `Inflow is ₹${formatIndianCurrency(totalInflow)} while outflow is ₹${formatIndianCurrency(totalOutflow)}. Net cash flow stands at ₹${formatIndianCurrency(netCashFlow)}.`;
 
 
 
-  /* =========================
-     DESTROY OLD CHARTS
-  ========================= */
+  // =====================================
+  // DESTROY OLD CHARTS
+  // =====================================
 
   if (cashFlowChart)
     cashFlowChart.destroy();
@@ -461,132 +472,11 @@ function updateDashboard(filteredData) {
   if (topExpenseChart)
     topExpenseChart.destroy();
 
-  if (monthlyPercentageChart)
-    monthlyPercentageChart.destroy();
 
 
-
-  /* =========================
-     CHART 1
-     INFLOW VS OUTFLOW
-  ========================= */
-
-  cashFlowChart = new Chart(
-    document.getElementById(
-      "cashFlowTypeChart"
-    ),
-    {
-
-      type: "bar",
-
-      data: {
-
-        labels: [
-          "Inflow",
-          "Outflow"
-        ],
-
-        datasets: [{
-
-          data: [
-            totalInflow,
-            totalOutflow
-          ],
-
-          backgroundColor: [
-            "#22c55e",
-            "#ef4444"
-          ],
-
-          borderRadius: 14
-
-        }]
-
-      },
-
-      options: {
-
-        responsive: true,
-
-        maintainAspectRatio: false,
-
-        plugins: {
-
-          legend: {
-            display: false
-          }
-
-        }
-
-      }
-
-    }
-  );
-
-
-
-  /* =========================
-     CHART 2
-     TOP EXPENSES
-  ========================= */
-
-  categoryChart = new Chart(
-    document.getElementById(
-      "categoryChart"
-    ),
-    {
-
-      type: "bar",
-
-      data: {
-
-        labels:
-          sortedExpenses
-          .slice(0, 10)
-          .map(item => item[0]),
-
-        datasets: [{
-
-          data:
-            sortedExpenses
-            .slice(0, 10)
-            .map(item => item[1]),
-
-          backgroundColor:
-            "#ef4444",
-
-          borderRadius: 10
-
-        }]
-
-      },
-
-      options: {
-
-        indexAxis: "y",
-
-        responsive: true,
-
-        maintainAspectRatio: false,
-
-        plugins: {
-
-          legend: {
-            display: false
-          }
-
-        }
-
-      }
-
-    }
-  );
-
-
-
-  /* =========================
-     MONTH TREND
-  ========================= */
+  // =====================================
+  // MONTH TREND CHART
+  // =====================================
 
   const months =
     [...new Set(
@@ -598,8 +488,6 @@ function updateDashboard(filteredData) {
   const inflowTrend = [];
   const outflowTrend = [];
   const netTrend = [];
-
-
 
   months.forEach(month => {
 
@@ -616,8 +504,8 @@ function updateDashboard(filteredData) {
           item.flowType === "Inflow"
       )
       .reduce(
-        (sum, item) =>
-          sum + item.amount,
+        (a,b) =>
+          a + b.amount,
         0
       );
 
@@ -628,15 +516,13 @@ function updateDashboard(filteredData) {
           item.flowType === "Outflow"
       )
       .reduce(
-        (sum, item) =>
-          sum + item.amount,
+        (a,b) =>
+          a + b.amount,
         0
       );
 
     inflowTrend.push(inflow);
-
     outflowTrend.push(outflow);
-
     netTrend.push(
       inflow - outflow
     );
@@ -667,7 +553,16 @@ function updateDashboard(filteredData) {
 
             borderColor: "#22c55e",
 
-            tension: 0.4
+            backgroundColor:
+              "rgba(34,197,94,0.15)",
+
+            pointRadius: 5,
+
+            pointHoverRadius: 7,
+
+            tension: 0.4,
+
+            fill: true
 
           },
 
@@ -679,7 +574,16 @@ function updateDashboard(filteredData) {
 
             borderColor: "#ef4444",
 
-            tension: 0.4
+            backgroundColor:
+              "rgba(239,68,68,0.15)",
+
+            pointRadius: 5,
+
+            pointHoverRadius: 7,
+
+            tension: 0.4,
+
+            fill: true
 
           },
 
@@ -691,7 +595,16 @@ function updateDashboard(filteredData) {
 
             borderColor: "#3b82f6",
 
-            tension: 0.4
+            backgroundColor:
+              "rgba(59,130,246,0.15)",
+
+            pointRadius: 5,
+
+            pointHoverRadius: 7,
+
+            tension: 0.4,
+
+            fill: true
 
           }
 
@@ -703,7 +616,64 @@ function updateDashboard(filteredData) {
 
         responsive: true,
 
-        maintainAspectRatio: false
+        maintainAspectRatio: false,
+
+        interaction: {
+
+          mode: "index",
+
+          intersect: false
+
+        },
+
+        plugins: {
+
+          tooltip:
+            commonTooltip(),
+
+          legend: {
+
+            labels: {
+              color: "white"
+            }
+
+          }
+
+        },
+
+        scales: {
+
+          x: {
+
+            ticks: {
+              color: "white"
+            },
+
+            grid: {
+              color: "#334155"
+            }
+
+          },
+
+          y: {
+
+            ticks: {
+
+              color: "white",
+
+              callback: value =>
+                "₹" +
+                formatIndianCurrency(value)
+
+            },
+
+            grid: {
+              color: "#334155"
+            }
+
+          }
+
+        }
 
       }
 
@@ -712,9 +682,233 @@ function updateDashboard(filteredData) {
 
 
 
-  /* =========================
-     GROUP ANALYSIS
-  ========================= */
+  // =====================================
+  // INFLOW VS OUTFLOW
+  // =====================================
+
+  cashFlowChart =
+    new Chart(
+      document.getElementById(
+        "cashFlowTypeChart"
+      ),
+      {
+
+        type: "bar",
+
+        data: {
+
+          labels: [
+            "Inflow",
+            "Outflow"
+          ],
+
+          datasets: [{
+
+            data: [
+              totalInflow,
+              totalOutflow
+            ],
+
+            backgroundColor: [
+              "#22c55e",
+              "#ef4444"
+            ],
+
+            borderRadius: 14
+
+          }]
+
+        },
+
+        options: {
+
+          responsive: true,
+
+          maintainAspectRatio: false,
+
+          plugins: {
+
+            legend: {
+              display: false
+            },
+
+            tooltip:
+              commonTooltip()
+
+          },
+
+          scales: {
+
+            y: {
+
+              ticks: {
+
+                color: "white",
+
+                callback: value =>
+                  "₹" +
+                  formatIndianCurrency(value)
+
+              },
+
+              grid: {
+                color: "#334155"
+              }
+
+            },
+
+            x: {
+
+              ticks: {
+                color: "white"
+              },
+
+              grid: {
+                display: false
+              }
+
+            }
+
+          }
+
+        }
+
+      }
+    );
+
+
+
+  // =====================================
+  // TOP EXPENSE CATEGORIES
+  // =====================================
+
+  const expenseTotals = {};
+
+  expenseData.forEach(item => {
+
+    if (
+      !expenseTotals[item.category]
+    ) {
+
+      expenseTotals[
+        item.category
+      ] = 0;
+
+    }
+
+    expenseTotals[
+      item.category
+    ] += item.amount;
+
+  });
+
+  const sortedExpenses =
+    Object.entries(expenseTotals)
+    .sort(
+      (a,b) =>
+        b[1] - a[1]
+    )
+    .slice(0,10);
+
+
+
+  categoryChart =
+    new Chart(
+      document.getElementById(
+        "categoryChart"
+      ),
+      {
+
+        type: "bar",
+
+        data: {
+
+          labels:
+            sortedExpenses.map(
+              item => item[0]
+            ),
+
+          datasets: [{
+
+            label: "Expense",
+
+            data:
+              sortedExpenses.map(
+                item => item[1]
+              ),
+
+            backgroundColor:
+              "#ef4444",
+
+            borderRadius: 12
+
+          }]
+
+        },
+
+        options: {
+
+          indexAxis: "y",
+
+          responsive: true,
+
+          maintainAspectRatio: false,
+
+          plugins: {
+
+            legend: {
+              display: false
+            },
+
+            tooltip:
+              commonTooltip()
+
+          },
+
+          scales: {
+
+            x: {
+
+              ticks: {
+
+                color: "white",
+
+                callback: value =>
+                  "₹" +
+                  formatIndianCurrency(value)
+
+              },
+
+              grid: {
+                color: "#334155"
+              }
+
+            },
+
+            y: {
+
+              ticks: {
+                color: "white"
+              },
+
+              grid: {
+                display: false
+              }
+
+            }
+
+          }
+
+        }
+
+      }
+    );
+
+
+
+  // =====================================
+  // GROUP ANALYSIS
+  // =====================================
 
   const groupTotals = {};
 
@@ -733,269 +927,37 @@ function updateDashboard(filteredData) {
 
 
 
-  groupChart = new Chart(
-    document.getElementById(
-      "departmentChart"
-    ),
-    {
-
-      type: "doughnut",
-
-      data: {
-
-        labels:
-          Object.keys(groupTotals),
-
-        datasets: [{
-
-          data:
-            Object.values(
-              groupTotals
-            ),
-
-          backgroundColor: [
-
-            "#3b82f6",
-            "#22c55e",
-            "#ef4444",
-            "#8b5cf6",
-            "#f59e0b"
-
-          ]
-
-        }]
-
-      },
-
-      options: {
-
-        responsive: true,
-
-        maintainAspectRatio: false
-
-      }
-
-    }
-  );
-
-
-
-  /* =========================
-     TOP INFLOW SOURCES
-  ========================= */
-
-  const inflowTotals = {};
-
-  inflowData.forEach(item => {
-
-    if (!inflowTotals[item.category]) {
-
-      inflowTotals[item.category] = 0;
-
-    }
-
-    inflowTotals[item.category] +=
-      item.amount;
-
-  });
-
-  const sortedInflows =
-    Object.entries(inflowTotals)
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, 5);
-
-
-
-  topInflowChart = new Chart(
-    document.getElementById(
-      "topInflowChart"
-    ),
-    {
-
-      type: "bar",
-
-      data: {
-
-        labels:
-          sortedInflows.map(
-            item => item[0]
-          ),
-
-        datasets: [{
-
-          data:
-            sortedInflows.map(
-              item => item[1]
-            ),
-
-          backgroundColor:
-            "#22c55e",
-
-          borderRadius: 12
-
-        }]
-
-      },
-
-      options: {
-
-        indexAxis: "y",
-
-        responsive: true,
-
-        maintainAspectRatio: false,
-
-        plugins: {
-
-          legend: {
-            display: false
-          }
-
-        }
-
-      }
-
-    }
-  );
-
-
-
-  /* =========================
-     TOP EXPENSE DRIVERS
-  ========================= */
-
-  topExpenseChart = new Chart(
-    document.getElementById(
-      "topExpenseChart"
-    ),
-    {
-
-      type: "bar",
-
-      data: {
-
-        labels:
-          sortedExpenses
-          .slice(0, 5)
-          .map(item => item[0]),
-
-        datasets: [{
-
-          data:
-            sortedExpenses
-            .slice(0, 5)
-            .map(item => item[1]),
-
-          backgroundColor:
-            "#ef4444",
-
-          borderRadius: 12
-
-        }]
-
-      },
-
-      options: {
-
-        indexAxis: "y",
-
-        responsive: true,
-
-        maintainAspectRatio: false,
-
-        plugins: {
-
-          legend: {
-            display: false
-          }
-
-        }
-
-      }
-
-    }
-  );
-
-
-
-  /* =========================
-     MONTHLY %
-  ========================= */
-
-  const inflowPercentages = [];
-  const outflowPercentages = [];
-
-  months.forEach((month, index) => {
-
-    const inflow =
-      inflowTrend[index];
-
-    const outflow =
-      outflowTrend[index];
-
-    const total =
-      inflow + outflow;
-
-    inflowPercentages.push(
-      total > 0
-        ? (
-            (inflow / total) * 100
-          ).toFixed(1)
-        : 0
-    );
-
-    outflowPercentages.push(
-      total > 0
-        ? (
-            (outflow / total) * 100
-          ).toFixed(1)
-        : 0
-    );
-
-  });
-
-
-
-  monthlyPercentageChart =
+  groupChart =
     new Chart(
       document.getElementById(
-        "monthlyPercentageChart"
+        "departmentChart"
       ),
       {
 
-        type: "line",
+        type: "doughnut",
 
         data: {
 
-          labels: months,
+          labels:
+            Object.keys(groupTotals),
 
-          datasets: [
+          datasets: [{
 
-            {
+            data:
+              Object.values(groupTotals),
 
-              label: "Inflow %",
+            backgroundColor: [
 
-              data: inflowPercentages,
+              "#3b82f6",
+              "#22c55e",
+              "#ef4444",
+              "#8b5cf6",
+              "#f59e0b",
+              "#06b6d4"
 
-              borderColor: "#22c55e",
+            ]
 
-              tension: 0.4
-
-            },
-
-            {
-
-              label: "Outflow %",
-
-              data: outflowPercentages,
-
-              borderColor: "#ef4444",
-
-              tension: 0.4
-
-            }
-
-          ]
+          }]
 
         },
 
@@ -1003,7 +965,24 @@ function updateDashboard(filteredData) {
 
           responsive: true,
 
-          maintainAspectRatio: false
+          maintainAspectRatio: false,
+
+          plugins: {
+
+            tooltip:
+              commonTooltip(),
+
+            legend: {
+
+              position: "bottom",
+
+              labels: {
+                color: "white"
+              }
+
+            }
+
+          }
 
         }
 
@@ -1012,81 +991,172 @@ function updateDashboard(filteredData) {
 
 
 
-  /* =========================
-     CATEGORY SUMMARY TABLE
-  ========================= */
+  // =====================================
+  // TOP INFLOW SOURCES
+  // =====================================
 
-  const summaryTable =
-    document.getElementById(
-      "categorySummaryTable"
+  const inflowTotals = {};
+
+  inflowData.forEach(item => {
+
+    if (
+      !inflowTotals[item.category]
+    ) {
+
+      inflowTotals[
+        item.category
+      ] = 0;
+
+    }
+
+    inflowTotals[
+      item.category
+    ] += item.amount;
+
+  });
+
+  const sortedInflows =
+    Object.entries(inflowTotals)
+    .sort(
+      (a,b) =>
+        b[1] - a[1]
+    )
+    .slice(0,5);
+
+
+
+  topInflowChart =
+    new Chart(
+      document.getElementById(
+        "topInflowChart"
+      ),
+      {
+
+        type: "bar",
+
+        data: {
+
+          labels:
+            sortedInflows.map(
+              item => item[0]
+            ),
+
+          datasets: [{
+
+            label: "Inflow",
+
+            data:
+              sortedInflows.map(
+                item => item[1]
+              ),
+
+            backgroundColor:
+              "#22c55e",
+
+            borderRadius: 12
+
+          }]
+
+        },
+
+        options: {
+
+          responsive: true,
+
+          maintainAspectRatio: false,
+
+          plugins: {
+
+            legend: {
+              display: false
+            },
+
+            tooltip:
+              commonTooltip()
+
+          }
+
+        }
+
+      }
     );
 
-  summaryTable.innerHTML = "";
-
-  const categoryTotals = {};
-
-  filteredData.forEach(item => {
-
-    if (!categoryTotals[item.category]) {
-
-      categoryTotals[item.category] = {
-
-        inflow: 0,
-        outflow: 0
-
-      };
-
-    }
-
-    if (item.flowType === "Inflow") {
-
-      categoryTotals[item.category]
-      .inflow += item.amount;
-
-    }
-
-    else {
-
-      categoryTotals[item.category]
-      .outflow += item.amount;
-
-    }
-
-  });
 
 
+  // =====================================
+  // TOP EXPENSE DRIVERS
+  // =====================================
 
-  Object.entries(categoryTotals)
-  .forEach(([category, values]) => {
+  topExpenseChart =
+    new Chart(
+      document.getElementById(
+        "topExpenseChart"
+      ),
+      {
 
-    const net =
-      values.inflow -
-      values.outflow;
+        type: "pie",
 
-    summaryTable.innerHTML +=
-    `
-    <tr>
+        data: {
 
-      <td>${category}</td>
+          labels:
+            sortedExpenses
+            .slice(0,5)
+            .map(item => item[0]),
 
-      <td>
-        ₹${formatIndianCurrency(values.inflow)}
-      </td>
+          datasets: [{
 
-      <td>
-        ₹${formatIndianCurrency(values.outflow)}
-      </td>
+            data:
+              sortedExpenses
+              .slice(0,5)
+              .map(item => item[1]),
 
-      <td>
-        ₹${formatIndianCurrency(net)}
-      </td>
+            backgroundColor: [
 
-    </tr>
-    `;
+              "#ef4444",
+              "#f97316",
+              "#eab308",
+              "#ec4899",
+              "#8b5cf6"
 
-  });
+            ]
+
+          }]
+
+        },
+
+        options: {
+
+          responsive: true,
+
+          maintainAspectRatio: false,
+
+          plugins: {
+
+            tooltip:
+              commonTooltip(),
+
+            legend: {
+
+              position: "bottom",
+
+              labels: {
+                color: "white"
+              }
+
+            }
+
+          }
+
+        }
+
+      }
+    );
 
 
+
+  // =====================================
+  // UPDATE TABLE
+  // =====================================
 
   updateTable(filteredData);
 
@@ -1094,9 +1164,9 @@ function updateDashboard(filteredData) {
 
 
 
-/* =========================
-   TABLE
-========================= */
+// =====================================
+// UPDATE TABLE
+// =====================================
 
 function updateTable(data) {
 
@@ -1110,23 +1180,23 @@ function updateTable(data) {
   data.forEach(item => {
 
     tbody.innerHTML +=
-    `
-    <tr>
+      `
+      <tr>
 
-      <td>${item.month}</td>
+        <td>${item.month}</td>
 
-      <td>${item.flowType}</td>
+        <td>${item.flowType}</td>
 
-      <td>${item.group}</td>
+        <td>${item.group}</td>
 
-      <td>${item.category}</td>
+        <td>${item.category}</td>
 
-      <td>
-        ₹${formatIndianCurrency(item.amount)}
-      </td>
+        <td>
+          ₹${formatIndianCurrency(item.amount)}
+        </td>
 
-    </tr>
-    `;
+      </tr>
+      `;
 
   });
 
@@ -1134,9 +1204,9 @@ function updateTable(data) {
 
 
 
-/* =========================
-   APPLY FILTERS
-========================= */
+// =====================================
+// APPLY FILTERS
+// =====================================
 
 function applyFilters() {
 
@@ -1176,8 +1246,7 @@ function applyFilters() {
     filteredData =
       filteredData.filter(
         item =>
-          item.month ===
-          selectedMonth
+          item.month === selectedMonth
       );
 
   }
@@ -1187,8 +1256,7 @@ function applyFilters() {
     filteredData =
       filteredData.filter(
         item =>
-          item.flowType ===
-          selectedFlow
+          item.flowType === selectedFlow
       );
 
   }
@@ -1198,8 +1266,7 @@ function applyFilters() {
     filteredData =
       filteredData.filter(
         item =>
-          item.group ===
-          selectedGroup
+          item.group === selectedGroup
       );
 
   }
@@ -1209,8 +1276,7 @@ function applyFilters() {
     filteredData =
       filteredData.filter(
         item =>
-          item.category ===
-          selectedCategory
+          item.category === selectedCategory
       );
 
   }
@@ -1221,92 +1287,9 @@ function applyFilters() {
 
 
 
-/* =========================
-   SEARCH
-========================= */
-
-document.getElementById(
-  "searchInput"
-).addEventListener(
-  "keyup",
-  function () {
-
-    const value =
-      this.value.toLowerCase();
-
-    const rows =
-      document.querySelectorAll(
-        "#financeTable tbody tr"
-      );
-
-    rows.forEach(row => {
-
-      row.style.display =
-        row.innerText
-        .toLowerCase()
-        .includes(value)
-        ? ""
-        : "none";
-
-    });
-
-  }
-);
-
-
-
-/* =========================
-   EXPORT CSV
-========================= */
-
-document.getElementById(
-  "exportBtn"
-).addEventListener(
-  "click",
-  function () {
-
-    let csv =
-      "Month,Flow Type,Group,Category,Amount\n";
-
-    allData.forEach(item => {
-
-      csv +=
-      `${item.month},
-      ${item.flowType},
-      ${item.group},
-      ${item.category},
-      ${item.amount}\n`;
-
-    });
-
-    const blob =
-      new Blob([csv], {
-        type: "text/csv"
-      });
-
-    const url =
-      window.URL.createObjectURL(
-        blob
-      );
-
-    const a =
-      document.createElement("a");
-
-    a.href = url;
-
-    a.download =
-      "cash-flow-report.csv";
-
-    a.click();
-
-  }
-);
-
-
-
-/* =========================
-   EVENTS
-========================= */
+// =====================================
+// EVENT LISTENERS
+// =====================================
 
 document.getElementById(
   "monthFilter"
@@ -1338,8 +1321,86 @@ document.getElementById(
 
 
 
-/* =========================
-   INITIAL LOAD
-========================= */
+// =====================================
+// SEARCH
+// =====================================
+
+document.getElementById(
+  "searchInput"
+).addEventListener(
+  "keyup",
+  function() {
+
+    const value =
+      this.value.toLowerCase();
+
+    const rows =
+      document.querySelectorAll(
+        "#financeTable tbody tr"
+      );
+
+    rows.forEach(row => {
+
+      row.style.display =
+        row.innerText
+        .toLowerCase()
+        .includes(value)
+        ? ""
+        : "none";
+
+    });
+
+  }
+);
+
+
+
+// =====================================
+// EXPORT CSV
+// =====================================
+
+document.getElementById(
+  "exportBtn"
+).addEventListener(
+  "click",
+  function() {
+
+    let csv =
+      "Month,Flow Type,Group,Category,Amount\n";
+
+    allData.forEach(item => {
+
+      csv +=
+        `${item.month},${item.flowType},${item.group},${item.category},${item.amount}\n`;
+
+    });
+
+    const blob =
+      new Blob(
+        [csv],
+        { type: "text/csv" }
+      );
+
+    const url =
+      window.URL.createObjectURL(blob);
+
+    const a =
+      document.createElement("a");
+
+    a.href = url;
+
+    a.download =
+      "cash-flow-report.csv";
+
+    a.click();
+
+  }
+);
+
+
+
+// =====================================
+// INITIAL LOAD
+// =====================================
 
 loadDashboard();
