@@ -498,37 +498,96 @@
 
 
 
-      <!-- INFLOW CONTRIBUTION -->
+      <!-- TOP INFLOW SOURCES -->
 
       <div class="chartCard">
 
         <div class="chartHeader">
 
           <h2>
-            Inflow Contribution Analysis
+            Top 5 Inflow Sources
           </h2>
 
         </div>
 
-        <canvas id="inflowContributionChart"></canvas>
+        <canvas id="topInflowChart"></canvas>
 
       </div>
 
 
 
-      <!-- OUTFLOW CONTRIBUTION -->
+      <!-- TOP EXPENSE DRIVERS -->
 
       <div class="chartCard">
 
         <div class="chartHeader">
 
           <h2>
-            Outflow Contribution Analysis
+            Top 5 Expense Drivers
           </h2>
 
         </div>
 
-        <canvas id="outflowContributionChart"></canvas>
+        <canvas id="topExpenseChart"></canvas>
+
+      </div>
+
+
+
+      <!-- MONTHLY CASH FLOW % -->
+
+      <div class="chartCard largeChart">
+
+        <div class="chartHeader">
+
+          <h2>
+            Monthly Outflow % vs Inflow %
+          </h2>
+
+        </div>
+
+        <canvas id="monthlyPercentageChart"></canvas>
+
+      </div>
+
+
+
+      <!-- CATEGORY BREAKDOWN TABLE -->
+
+      <div class="chartCard largeChart">
+
+        <div class="chartHeader">
+
+          <h2>
+            Category Wise Financial Distribution
+          </h2>
+
+        </div>
+
+        <div class="miniTableWrapper">
+
+          <table class="miniTable">
+
+            <thead>
+
+              <tr>
+
+                <th>Category</th>
+                <th>Inflow</th>
+                <th>Outflow</th>
+                <th>Net</th>
+
+              </tr>
+
+            </thead>
+
+            <tbody id="categorySummaryTable">
+
+            </tbody>
+
+          </table>
+
+        </div>
 
       </div>
 
